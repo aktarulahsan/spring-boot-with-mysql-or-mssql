@@ -1,6 +1,6 @@
 package com.aktarulahsan.erp.core.web.config;
 
-import com.aktarulahsan.erp.core.persistence.domain.entity.Users;
+import com.aktarulahsan.erp.core.persistence.domain.entity.User;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -20,7 +20,7 @@ public class CustomTokenEnhancer extends JwtAccessTokenConverter {
 	@Override
 	public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
 		
-		Users users = (Users) authentication.getPrincipal();
+		User users = (User) authentication.getPrincipal();
 		Map<String, Object> info = new LinkedHashMap<>(accessToken.getAdditionalInformation());
 		info.put("email", users.getEmail());
 		DefaultOAuth2AccessToken customAccessToken = new DefaultOAuth2AccessToken(accessToken);
