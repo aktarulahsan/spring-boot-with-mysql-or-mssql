@@ -1,8 +1,7 @@
-package com.aktarulahsan.erp.tms.customer;
-
+package com.aktarulahsan.erp.tms.setting.category;
 
 import com.aktarulahsan.erp.core.base.BaseRepository;
-import com.aktarulahsan.erp.tms.branch.BranchModel;
+import com.aktarulahsan.erp.tms.customer.CustomerModel;
 import com.aktarulahsan.erp.util.Response;
 import org.json.JSONObject;
 import org.springframework.security.core.Authentication;
@@ -19,16 +18,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
+
 @Repository
 @Transactional
-public class CustomerRepository extends BaseRepository {
+public class CategoryRepository  extends BaseRepository {
 
 
     public Response save(String reqObj) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 //        Object pricipal = auth.getPrincipal();
-        CustomerModel model = objectMapperReadValue(reqObj, CustomerModel.class);
+        CategoryModel model = objectMapperReadValue(reqObj, CategoryModel.class);
 
 
         model.setSsModifiedOn(new Date());
@@ -40,7 +41,7 @@ public class CustomerRepository extends BaseRepository {
 
     public Response update(String reqObj) {
 
-        CustomerModel  model = objectMapperReadValue(reqObj, CustomerModel.class);
+        CategoryModel  model = objectMapperReadValue(reqObj, CategoryModel.class);
 
 
         model.setSsCreatedOn(new Date());
@@ -54,7 +55,7 @@ public class CustomerRepository extends BaseRepository {
             return getErrorResponse("Id is blank");
         }
 
-        CustomerModel  model = findById(id);
+        CategoryModel  model = findById(id);
 
         if (model != null) {
             return baseDelete(model);
@@ -63,14 +64,14 @@ public class CustomerRepository extends BaseRepository {
         return getErrorResponse("Id not found");
     }
 
-    public CustomerModel findById(String id) {
+    public CategoryModel findById(String id) {
 
-        CustomerModel model 	= new CustomerModel();
+        CategoryModel model 	= new CategoryModel();
         model.setCusId(Integer.parseInt(id));
         Response response = baseFindById(criteriaQuery(model));
         if (response.isSuccess()) {
 
-            return getValueFromObject(response.getObj(), CustomerModel.class);
+            return getValueFromObject(response.getObj(), CategoryModel.class);
         }
         return null;
     }
@@ -81,14 +82,14 @@ public class CustomerRepository extends BaseRepository {
 
     public Response list(String reqObj) {
 
-        CustomerModel branchModel = null;
+        CategoryModel branchModel = null;
         if (null != reqObj) {
-            branchModel = objectMapperReadValue(reqObj, CustomerModel.class);
+            branchModel = objectMapperReadValue(reqObj, CategoryModel.class);
         }
         return baseList(criteriaQuery(branchModel));
     }
 
-    private CriteriaQuery criteriaQuery(CustomerModel filter) {
+    private CriteriaQuery criteriaQuery(CategoryModel filter) {
         init();
 
         List<Predicate> p 	= new ArrayList<Predicate>();
@@ -101,7 +102,7 @@ public class CustomerRepository extends BaseRepository {
         }
         return criteria;
     }
-    private List<Predicate> criteriaCondition(CustomerModel filter, CriteriaBuilder builder, Root<CustomerModel> root) {
+    private List<Predicate> criteriaCondition(CategoryModel filter, CriteriaBuilder builder, Root<CategoryModel> root) {
 
         if (builder == null) {
             builder 		= super.builder;
@@ -127,7 +128,7 @@ public class CustomerRepository extends BaseRepository {
     }
 
     private void init() {
-        initEntityManagerBuilderCriteriaQueryRoot(CustomerModel.class);
+        initEntityManagerBuilderCriteriaQueryRoot(CategoryModel.class);
         CriteriaBuilder builder 	= super.builder;
         CriteriaQuery criteria 		= super.criteria;
         Root root 					= super.root;
