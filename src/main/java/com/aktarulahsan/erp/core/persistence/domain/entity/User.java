@@ -17,7 +17,7 @@ import java.util.Set;
 @Setter
 @Getter
 @Entity
-public class Users extends BaseEntity implements UserDetails {
+public class User extends BaseEntity implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 	private String email;

@@ -1,6 +1,6 @@
 package com.aktarulahsan.erp.core.service;
 
-import com.aktarulahsan.erp.core.persistence.domain.entity.Users;
+import com.aktarulahsan.erp.core.persistence.domain.entity.User;
 import com.aktarulahsan.erp.core.persistence.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
@@ -17,7 +17,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String input) {
-		Users users = userRepository.findByUsername(input);
+		User users = userRepository.findByUsername(input);
 
 		if (users == null)
 			throw new BadCredentialsException("Bad credentials");
