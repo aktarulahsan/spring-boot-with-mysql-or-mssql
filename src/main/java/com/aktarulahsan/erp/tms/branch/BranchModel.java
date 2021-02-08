@@ -16,15 +16,20 @@ import javax.persistence.Table;
 @Table(name = "branchname")
 public class BranchModel extends BaseModel {
 
+//    BRANCH_ID, BRANCH_NAME, COMPANY_ID, STATUS, CREATED_BY, CREATE_DATE, UPDATED_BY, UPDATE_DATE
+
     @Id
-    @Column(nullable = false, name = "branchID")
+    @Column(nullable = false, name = "BRANCH_ID")
     int branchID;
 
-    @Column(name = "companyID")
+    @Column(name = "COMPANY_ID")
     int comId;
 
-    @Column(name = "branchName")
+    @Column(name = "BRANCH_NAME")
     String bName;
+
+    @Column(name = "STATUS")
+    int status;
 
 
 }
