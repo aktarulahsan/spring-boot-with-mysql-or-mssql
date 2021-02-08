@@ -1,4 +1,4 @@
-package com.aktarulahsan.erp.tms.setting.category;
+package com.aktarulahsan.erp.tms.setting.subCategory;
 
 import com.aktarulahsan.erp.tms.customer.CustomerRepository;
 import com.aktarulahsan.erp.util.Response;
@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CategoryService {
+public class SubCategoryService {
+
     @Autowired
-    private CategoryRepository repository;
+    private SubCategoryRepository repository;
     public Response list(String reqObj) {
         return repository.list(reqObj);
     }
@@ -24,4 +25,5 @@ public class CategoryService {
     public Response delete(String id) {
         return repository.delete(id);
     }
+
 }

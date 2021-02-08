@@ -30,5 +30,8 @@ public class BranchModel extends BaseModel {
     @Column(name = "STATUS")
     int status;
 
+    @Column(name = "STATUS")
+    int status;
+
 
 }

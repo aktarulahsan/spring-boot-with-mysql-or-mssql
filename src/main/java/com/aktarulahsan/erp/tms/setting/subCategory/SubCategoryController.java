@@ -1,27 +1,22 @@
-package com.aktarulahsan.erp.tms.setting.category;
+package com.aktarulahsan.erp.tms.setting.subCategory;
 
 
-import com.aktarulahsan.erp.core.base.BaseModel;
-import com.aktarulahsan.erp.tms.customer.CustomerService;
+
 import com.aktarulahsan.erp.util.Response;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 @RestController
-@RequestMapping("/tms/category")
-public class CategoryController  {
+@RequestMapping("/tms/subCategory")
+public class SubCategoryController {
+
 
     @Autowired
-    CategoryService service;
+    SubCategoryService service;
 
 
     @GetMapping("/list")
-    public Response getAll(@RequestBody(required = false) String reqObj) {
+    public Response getAlluser(@RequestBody(required = false) String reqObj) {
         return service.list(reqObj);
     }
 
@@ -42,4 +37,5 @@ public class CategoryController  {
     public Response delete(@RequestParam("cusId") String reqId) {
         return service.delete(reqId);
     }
+
 }

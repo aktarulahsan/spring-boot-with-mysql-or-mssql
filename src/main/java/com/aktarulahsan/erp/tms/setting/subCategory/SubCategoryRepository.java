@@ -1,7 +1,7 @@
-package com.aktarulahsan.erp.tms.setting.category;
+package com.aktarulahsan.erp.tms.setting.subCategory;
 
 import com.aktarulahsan.erp.core.base.BaseRepository;
-import com.aktarulahsan.erp.tms.customer.CustomerModel;
+
 import com.aktarulahsan.erp.util.Response;
 import org.json.JSONObject;
 import org.springframework.security.core.Authentication;
@@ -20,18 +20,15 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class CategoryRepository extends BaseRepository {
+public class SubCategoryRepository extends BaseRepository {
 
 
 
     public Response save(String reqObj) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        Object pricipal = auth.getPrincipal();
-        CategoryModel model = objectMapperReadValue(reqObj, CategoryModel.class);
-//        if (pricipal instanceof User) {
-//            model.setSsCreator(((User) pricipal).getUsername());
-//        }
+
+        SubCategoryModel model = objectMapperReadValue(reqObj, SubCategoryModel.class);
 
         model.setSsModifiedOn(new Date());
 
@@ -42,7 +39,7 @@ public class CategoryRepository extends BaseRepository {
 
     public Response update(String reqObj) {
 
-        CategoryModel  model = objectMapperReadValue(reqObj, CategoryModel.class);
+        SubCategoryModel  model = objectMapperReadValue(reqObj, SubCategoryModel.class);
 
 
         model.setSsCreatedOn(new Date());
@@ -56,7 +53,7 @@ public class CategoryRepository extends BaseRepository {
             return getErrorResponse("Id is blank");
         }
 
-        CategoryModel  model = findById(id);
+        SubCategoryModel  model = findById(id);
 
         if (model != null) {
             return baseDelete(model);
@@ -65,14 +62,14 @@ public class CategoryRepository extends BaseRepository {
         return getErrorResponse("Id not found");
     }
 
-    public CategoryModel findById(String id) {
+    public SubCategoryModel findById(String id) {
 
-        CategoryModel model 	= new CategoryModel();
-        model.setCategoryId(Integer.parseInt(id));
+        SubCategoryModel model 	= new SubCategoryModel();
+        model.setItemID(Integer.parseInt(id));
         Response response = baseFindById(criteriaQuery(model));
         if (response.isSuccess()) {
 
-            return getValueFromObject(response.getObj(), CategoryModel.class);
+            return getValueFromObject(response.getObj(), SubCategoryModel.class);
         }
         return null;
     }
@@ -83,14 +80,14 @@ public class CategoryRepository extends BaseRepository {
 
     public Response list(String reqObj) {
 
-        CategoryModel branchModel = null;
+        SubCategoryModel branchModel = null;
         if (null != reqObj) {
-            branchModel = objectMapperReadValue(reqObj, CategoryModel.class);
+            branchModel = objectMapperReadValue(reqObj, SubCategoryModel.class);
         }
         return baseList(criteriaQuery(branchModel));
     }
 
-    private CriteriaQuery criteriaQuery(CategoryModel filter) {
+    private CriteriaQuery criteriaQuery(SubCategoryModel filter) {
         init();
 
         List<Predicate> p 	= new ArrayList<Predicate>();
@@ -103,7 +100,7 @@ public class CategoryRepository extends BaseRepository {
         }
         return criteria;
     }
-    private List<Predicate> criteriaCondition(CategoryModel filter, CriteriaBuilder builder, Root<CategoryModel> root) {
+    private List<Predicate> criteriaCondition(SubCategoryModel filter, CriteriaBuilder builder, Root<SubCategoryModel> root) {
 
         if (builder == null) {
             builder 		= super.builder;
@@ -120,8 +117,8 @@ public class CategoryRepository extends BaseRepository {
 //                Predicate condition 	= builder.equal(root.get("activeStatus"), filter.getRoleId());
 //                p.add(condition);
 //            }
-            if (filter.getCategoryId() >0) {
-                Predicate condition 	= builder.equal(root.get("categoryId"), filter.getCategoryId());
+            if (filter.getItemID() >0) {
+                Predicate condition 	= builder.equal(root.get("itemID"), filter.getItemID());
                 p.add(condition);
             }
 
@@ -132,7 +129,7 @@ public class CategoryRepository extends BaseRepository {
     }
 
     private void init() {
-        initEntityManagerBuilderCriteriaQueryRoot(CategoryModel.class);
+        initEntityManagerBuilderCriteriaQueryRoot(SubCategoryModel.class);
         CriteriaBuilder builder 	= super.builder;
         CriteriaQuery criteria 		= super.criteria;
         Root root 					= super.root;
