@@ -27,11 +27,11 @@ public class BranchModel extends BaseModel {
 
     @Column(name = "BRANCH_NAME")
     String bName;
-    @Column(name = "STATUS")
-    int status;
 
     @Column(name = "STATUS")
     int status;
+
+
 
 
 }

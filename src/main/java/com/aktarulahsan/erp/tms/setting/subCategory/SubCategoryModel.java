@@ -21,7 +21,7 @@ public class SubCategoryModel extends BaseModel {
 
     @Id
     @Column(nullable = false, name = "I_ID")
-    int itemID;
+    int itemId;
 
     @Column(name = "C_ID")
     int categoryId;

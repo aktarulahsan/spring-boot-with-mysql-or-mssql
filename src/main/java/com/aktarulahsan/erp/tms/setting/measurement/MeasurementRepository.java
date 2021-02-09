@@ -1,4 +1,5 @@
-package com.aktarulahsan.erp.tms.setting.subCategory;
+package com.aktarulahsan.erp.tms.setting.measurement;
+
 
 import com.aktarulahsan.erp.core.base.BaseRepository;
 
@@ -20,15 +21,16 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class SubCategoryRepository extends BaseRepository {
+public class MeasurementRepository extends BaseRepository {
 
 
 
     public Response save(String reqObj) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Object pricipal = auth.getPrincipal();
+        MeasurementModel model = objectMapperReadValue(reqObj, MeasurementModel.class);
 
-        SubCategoryModel model = objectMapperReadValue(reqObj, SubCategoryModel.class);
 
         model.setSsModifiedOn(new Date());
 
@@ -39,7 +41,7 @@ public class SubCategoryRepository extends BaseRepository {
 
     public Response update(String reqObj) {
 
-        SubCategoryModel  model = objectMapperReadValue(reqObj, SubCategoryModel.class);
+        MeasurementModel  model = objectMapperReadValue(reqObj, MeasurementModel.class);
 
 
         model.setSsCreatedOn(new Date());
@@ -53,7 +55,7 @@ public class SubCategoryRepository extends BaseRepository {
             return getErrorResponse("Id is blank");
         }
 
-        SubCategoryModel  model = findById(id);
+        MeasurementModel  model = findById(id);
 
         if (model != null) {
             return baseDelete(model);
@@ -62,14 +64,14 @@ public class SubCategoryRepository extends BaseRepository {
         return getErrorResponse("Id not found");
     }
 
-    public SubCategoryModel findById(String id) {
+    public MeasurementModel findById(String id) {
 
-        SubCategoryModel model 	= new SubCategoryModel();
-        model.setItemId(Integer.parseInt(id));
+        MeasurementModel model 	= new MeasurementModel();
+        model.setMeasurementId(Integer.parseInt(id));
         Response response = baseFindById(criteriaQuery(model));
         if (response.isSuccess()) {
 
-            return getValueFromObject(response.getObj(), SubCategoryModel.class);
+            return getValueFromObject(response.getObj(), MeasurementModel.class);
         }
         return null;
     }
@@ -80,14 +82,14 @@ public class SubCategoryRepository extends BaseRepository {
 
     public Response list(String reqObj) {
 
-        SubCategoryModel branchModel = null;
+        MeasurementModel branchModel = null;
         if (null != reqObj) {
-            branchModel = objectMapperReadValue(reqObj, SubCategoryModel.class);
+            branchModel = objectMapperReadValue(reqObj, MeasurementModel.class);
         }
         return baseList(criteriaQuery(branchModel));
     }
 
-    private CriteriaQuery criteriaQuery(SubCategoryModel filter) {
+    private CriteriaQuery criteriaQuery(MeasurementModel filter) {
         init();
 
         List<Predicate> p 	= new ArrayList<Predicate>();
@@ -100,7 +102,7 @@ public class SubCategoryRepository extends BaseRepository {
         }
         return criteria;
     }
-    private List<Predicate> criteriaCondition(SubCategoryModel filter, CriteriaBuilder builder, Root<SubCategoryModel> root) {
+    private List<Predicate> criteriaCondition(MeasurementModel filter, CriteriaBuilder builder, Root<MeasurementModel> root) {
 
         if (builder == null) {
             builder 		= super.builder;
@@ -113,12 +115,9 @@ public class SubCategoryRepository extends BaseRepository {
 
         if (filter != null) {
 
-//            if (filter.getRoleId() !=null) {
-//                Predicate condition 	= builder.equal(root.get("activeStatus"), filter.getRoleId());
-//                p.add(condition);
-//            }
-            if (filter.getItemId() >0) {
-                Predicate condition 	= builder.equal(root.get("itemId"), filter.getItemId());
+
+            if (filter.getMeasurementId() >0) {
+                Predicate condition 	= builder.equal(root.get("measurementId"), filter.getMeasurementId());
                 p.add(condition);
             }
 
@@ -129,7 +128,7 @@ public class SubCategoryRepository extends BaseRepository {
     }
 
     private void init() {
-        initEntityManagerBuilderCriteriaQueryRoot(SubCategoryModel.class);
+        initEntityManagerBuilderCriteriaQueryRoot(MeasurementModel.class);
         CriteriaBuilder builder 	= super.builder;
         CriteriaQuery criteria 		= super.criteria;
         Root root 					= super.root;

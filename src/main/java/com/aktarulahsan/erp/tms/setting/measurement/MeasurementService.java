@@ -1,14 +1,16 @@
-package com.aktarulahsan.erp.tms.setting.category;
+package com.aktarulahsan.erp.tms.setting.measurement;
 
-
+import com.aktarulahsan.erp.tms.setting.category.CategoryRepository;
 import com.aktarulahsan.erp.util.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 @Service
-public class CategoryService {
+public class MeasurementService {
+
     @Autowired
-    private CategoryRepository repository;
+    private MeasurementRepository repository;
     public Response list(String reqObj) {
         return repository.list(reqObj);
     }
