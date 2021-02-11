@@ -47,6 +47,11 @@ public class SubCategoryRepository extends BaseRepository {
         return baseSaveOrUpdate(model);
 
     }
+    public Response findDetailsById(String id) {
+        SubCategoryModel entity = new SubCategoryModel();
+        entity.setItemId(Integer.parseInt(id));
+        return getListFindById(criteriaQuery(entity));
+    }
 
     public Response delete(String id) {
         if (id == null) {
@@ -127,6 +132,7 @@ public class SubCategoryRepository extends BaseRepository {
 
         return p;
     }
+
 
     private void init() {
         initEntityManagerBuilderCriteriaQueryRoot(SubCategoryModel.class);

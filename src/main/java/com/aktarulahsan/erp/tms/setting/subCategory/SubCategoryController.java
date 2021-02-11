@@ -38,4 +38,10 @@ public class SubCategoryController {
         return service.delete(reqId);
     }
 
+    @GetMapping("/findById")
+    public Response findorderById(@RequestParam("orderId") String id) {
+        return service.findDetailsById(id);
+    }
+
+
 }

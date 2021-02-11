@@ -3,6 +3,7 @@ package com.aktarulahsan.erp.tms.setting.measurement;
 
 import com.aktarulahsan.erp.core.base.BaseRepository;
 
+import com.aktarulahsan.erp.tms.setting.subCategory.SubCategoryModel;
 import com.aktarulahsan.erp.util.Response;
 import org.json.JSONObject;
 import org.springframework.security.core.Authentication;
@@ -63,6 +64,12 @@ public class MeasurementRepository extends BaseRepository {
 
         return getErrorResponse("Id not found");
     }
+    public Response findDetailsById(String id) {
+        MeasurementModel entity = new MeasurementModel();
+        entity.setItemId(Integer.parseInt(id));
+        return getListFindById(criteriaQuery(entity));
+    }
+
 
     public MeasurementModel findById(String id) {
 
@@ -114,7 +121,10 @@ public class MeasurementRepository extends BaseRepository {
         List<Predicate> p 	= new ArrayList<Predicate>();
 
         if (filter != null) {
-
+            if (filter.getItemId() >0) {
+                Predicate condition 	= builder.equal(root.get("itemId"), filter.getItemId());
+                p.add(condition);
+            }
 
             if (filter.getMeasurementId() >0) {
                 Predicate condition 	= builder.equal(root.get("measurementId"), filter.getMeasurementId());

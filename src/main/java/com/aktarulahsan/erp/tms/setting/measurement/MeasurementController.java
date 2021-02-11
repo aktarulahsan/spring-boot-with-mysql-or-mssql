@@ -34,7 +34,15 @@ public class MeasurementController {
     }
 
     @DeleteMapping("/delete")
-    public Response delete(@RequestParam("cusId") String reqId) {
+    public Response delete(@RequestParam("measurementId") String reqId) {
         return service.delete(reqId);
     }
+
+
+    @GetMapping("/findDetailsById")
+    public Response findDetailsById(@RequestParam("itemId") String id) {
+        return service.findDetailsById(id);
+    }
+
+
 }
