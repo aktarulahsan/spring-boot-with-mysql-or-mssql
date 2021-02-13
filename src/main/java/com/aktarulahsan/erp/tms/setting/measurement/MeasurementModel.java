@@ -28,6 +28,9 @@ public class MeasurementModel extends BaseModel {
     @Column(  name = "M_NAME")
     String measurementName;
 
+    @Column(  name = "M_VALUE")
+    double measurementValue;
+
     @Column(  name = "STATUS")
     int status;
 

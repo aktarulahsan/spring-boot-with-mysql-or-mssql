@@ -39,8 +39,12 @@ public class SubCategoryController {
     }
 
     @GetMapping("/findById")
-    public Response findorderById(@RequestParam("orderId") String id) {
+    public Response findorderById(@RequestParam("categoryId") String id) {
         return service.findDetailsById(id);
+    }
+    @GetMapping("/findByCategoryId")
+    public Response findByCategoryId(@RequestParam("categoryId") String id) {
+        return service.findByCategoryId(id);
     }
 
 

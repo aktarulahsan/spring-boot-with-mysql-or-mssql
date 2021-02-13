@@ -1,15 +1,18 @@
-package com.aktarulahsan.erp.tms.setting.subCategory;
+package com.aktarulahsan.erp.tms.order;
 
-import com.aktarulahsan.erp.tms.customer.CustomerRepository;
 import com.aktarulahsan.erp.util.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Service
-public class SubCategoryService {
+public class OrderService {
 
     @Autowired
-    private SubCategoryRepository repository;
+    private OrderRepository repository;
+
+
     public Response list(String reqObj) {
         return repository.list(reqObj);
     }
@@ -25,13 +28,9 @@ public class SubCategoryService {
     public Response delete(String id) {
         return repository.delete(id);
     }
-    public Response findDetailsById(String id) {
 
-        return repository.findDetailsById(id);
+    public Response orderList( HttpServletRequest reqObj ) {
+        return repository.findOrderByDeliveryStatus(reqObj);
+
     }
-    public Response findByCategoryId(String id) {
-
-        return repository.findByCategoryId(id);
-    }
-
 }
