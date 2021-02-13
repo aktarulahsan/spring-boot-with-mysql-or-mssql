@@ -1,5 +1,6 @@
 package com.aktarulahsan.erp.tms.setting.itemModel;
 
+import com.aktarulahsan.erp.core.base.BaseModel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,14 +14,14 @@ import javax.persistence.Table;
 @Setter
 @Entity
 @Table(name = "items_model")
-public class ItemModelEntity {
+public class ItemModelEntity extends BaseModel {
 
 
 //    ID, MODEL_NAME, I_ID, STATUS, CREATED_BY, CREATE_DATE, UPDATED_BY, UPDATE_DATE
 
     @Id
     @Column(nullable = false, name = "ID")
-    int categoryId;
+    int itemModelId;
 
     @Column(  name = "MODEL_NAME")
     String modelName;
