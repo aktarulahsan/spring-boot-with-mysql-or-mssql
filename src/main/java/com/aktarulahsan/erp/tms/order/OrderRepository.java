@@ -4,6 +4,7 @@ package com.aktarulahsan.erp.tms.order;
 import com.aktarulahsan.erp.core.base.BaseRepository;
 import com.aktarulahsan.erp.tms.customer.CustomerModel;
 import com.aktarulahsan.erp.util.Response;
+import com.google.gson.Gson;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.security.core.Authentication;
@@ -28,7 +29,7 @@ public class OrderRepository extends BaseRepository {
     public Response save(String reqObj) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        Object pricipal = auth.getPrincipal();
+        Object pricipal = auth.getPrincipal();
 
 
         Response res = new Response();
@@ -46,24 +47,26 @@ public class OrderRepository extends BaseRepository {
         String oid = String.valueOf(orderId).substring(4,13);
         int oidi= Integer.parseInt(oid);
 
-//      String oids = oid.substring(2,13);
-//        String orderId = Long.toString(milliSeconds);
-
-//        model.setOrderId(json.getInt("orderId"));
-//        model.setOrderNo(oidi);
-        model.setCustomerCode(json.getInt("customerCode"));
-//        model.setTotalAmount(json.getFloat());
-//        model.setShippingAddress(json.getString("shippingAddress"));
-//        model.setActivStatus(json.getString("activStatus"));
-//        model.setDeliveryStatus(json.getString("deliveryStatus"));
-
-        JSONObject accountDetails = json.getJSONObject("orderAccountDetails");
-        JSONArray ordermeasurementList= json.getJSONArray("ordermeasurementList");
-//        detailsList = json.getJSONArray("orderDetailList");
+        model.setOrderNo(oidi);
+        model.orderAccountDetails.setOrderMaserNo(oidi);
+        OrderDetailsModel orderDetailsModel =new OrderDetailsModel();
+        res = baseOnlySave(model);
+        for (int i = 0; i < model.getOrdermeasurementList().size(); i++) {
+            model.ordermeasurementList.get(i).setOrderMaserNo(oidi);
+            model.ordermeasurementList.get(i).setSsCreatedOn(new Date());
 
 
+            orderDetailsModel = model.getOrdermeasurementList().get(i);
 
-        return baseOnlySave(model);
+            Response resp;
+            resp = baseOnlySave(orderDetailsModel);
+        }
+
+        OrderAccountDetailsModel accountDetailsModel= model.orderAccountDetails;
+
+
+
+        return baseOnlySave(accountDetailsModel);
     }
 
     public Response update(String reqObj) {

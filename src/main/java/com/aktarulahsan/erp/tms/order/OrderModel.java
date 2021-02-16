@@ -5,11 +5,9 @@ import com.aktarulahsan.erp.core.base.BaseModel;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -41,6 +39,11 @@ public class OrderModel extends BaseModel {
     @Column(name = "ORDER_STATUS")
     int status;
 
+    @Transient
+    OrderAccountDetailsModel orderAccountDetails;
+
+    @Transient
+    List<OrderDetailsModel> ordermeasurementList;
 
 
 }

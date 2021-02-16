@@ -18,7 +18,7 @@ public class OrderAccountDetailsModel extends BaseModel {
 //    ORDERAD_NO, ORDERM_NO, ITEMS_CODE, RA1TE, QTY, I_TOTAL_AMOUNT, CREATED_BY, CREATE_DATE, UPDATED_BY, UPDATE_DATE
     @Id
     @Column(nullable = false, name = "ORDERAD_NO")
-    int orderADetailsNo;
+    int id;
 
     @Column(name = "ORDERM_NO")
     int orderMaserNo;

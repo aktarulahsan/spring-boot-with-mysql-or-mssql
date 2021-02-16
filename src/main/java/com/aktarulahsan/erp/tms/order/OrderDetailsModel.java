@@ -3,11 +3,9 @@ package com.aktarulahsan.erp.tms.order;
 import com.aktarulahsan.erp.core.base.BaseModel;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -19,6 +17,8 @@ public class OrderDetailsModel extends BaseModel {
 
 //    ORDERD_NO, ORDERM_NO, M_ID, M_NAME, HIGHT, BODY, CREATED_BY, CREATE_DATE, UPDATED_BY, UPDATE_DATE
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO,generator="native")
+    @GenericGenerator(name = "native",strategy = "native")
     @Column(nullable = false, name = "ORDERD_NO")
     int orderDetailsNo;
 
