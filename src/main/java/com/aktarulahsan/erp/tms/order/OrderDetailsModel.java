@@ -34,6 +34,9 @@ public class OrderDetailsModel extends BaseModel {
     @Column(name = "M_VALUE")
     double measurementValue;
 
+    @Column(name = "DM")
+    String designModel;
+
 
 }
 

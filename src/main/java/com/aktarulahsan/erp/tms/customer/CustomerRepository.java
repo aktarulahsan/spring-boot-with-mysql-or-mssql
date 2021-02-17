@@ -3,6 +3,7 @@ package com.aktarulahsan.erp.tms.customer;
 
 import com.aktarulahsan.erp.core.base.BaseRepository;
 import com.aktarulahsan.erp.tms.branch.BranchModel;
+import com.aktarulahsan.erp.tms.setting.measurement.MeasurementModel;
 import com.aktarulahsan.erp.util.Response;
 import org.json.JSONObject;
 import org.springframework.security.core.Authentication;
@@ -74,7 +75,11 @@ public class CustomerRepository extends BaseRepository {
         }
         return null;
     }
-
+    public Response findDetailsById(String id) {
+        CustomerModel entity = new CustomerModel();
+        entity.setCusId(Integer.parseInt(id));
+        return baseFindById(criteriaQuery(entity));
+    }
 
 
 

@@ -33,4 +33,9 @@ public class OrderService {
         return repository.findOrderByDeliveryStatus(reqObj);
 
     }
+
+    public Response findOrderByCustomerId(String id) {
+
+        return repository.findOrderByCustomerId(id);
+    }
 }

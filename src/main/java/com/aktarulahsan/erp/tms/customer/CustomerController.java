@@ -37,4 +37,8 @@ public class CustomerController {
         return service.delete(reqId);
     }
 
+    @GetMapping("/findById")
+    public Response findDetailsById(@RequestParam("cusId") String id) {
+        return service.findDetailsById(id);
+    }
 }

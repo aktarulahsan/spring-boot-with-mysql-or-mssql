@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/tms/order")
 public class OrderController {
 
-
-
     @Autowired
     private OrderService service;
 
@@ -32,11 +30,6 @@ public class OrderController {
         return service.update(reqObj);
     }
 
-//    @PutMapping("/sales")
-//    public Response sales(@RequestBody String reqObj) {
-//        return service.sales(reqObj);
-//    }
-
 
     @DeleteMapping("/delete")
     public Response delete(@RequestParam("l1Code") String reqId) {
@@ -51,8 +44,9 @@ public class OrderController {
         return service.orderList(request);
     }
 
-//    @GetMapping("/salesList")
-//    public Response salesList() {
-//        return service.salesList();
-//    }
+
+    @GetMapping("/findOrderByCustomerId")
+    public Response findDetailsById(@RequestParam("customerCode") String id) {
+        return service.findOrderByCustomerId(id);
+    }
 }

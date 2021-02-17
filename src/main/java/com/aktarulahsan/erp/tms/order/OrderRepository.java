@@ -3,6 +3,7 @@ package com.aktarulahsan.erp.tms.order;
 
 import com.aktarulahsan.erp.core.base.BaseRepository;
 import com.aktarulahsan.erp.tms.customer.CustomerModel;
+import com.aktarulahsan.erp.tms.setting.measurement.MeasurementModel;
 import com.aktarulahsan.erp.util.Response;
 import com.google.gson.Gson;
 import org.json.JSONArray;
@@ -48,25 +49,40 @@ public class OrderRepository extends BaseRepository {
         int oidi= Integer.parseInt(oid);
 
         model.setOrderNo(oidi);
-        model.orderAccountDetails.setOrderMaserNo(oidi);
+//        model.orderAccountDetails.setOrderMaserNo(oidi);
         OrderDetailsModel orderDetailsModel =new OrderDetailsModel();
         res = baseOnlySave(model);
-        for (int i = 0; i < model.getOrdermeasurementList().size(); i++) {
-            model.ordermeasurementList.get(i).setOrderMaserNo(oidi);
-            model.ordermeasurementList.get(i).setSsCreatedOn(new Date());
+//        for (int i = 0; i < model.getOrdermeasurementList().size(); i++) {
+//            model.ordermeasurementList.get(i).setOrderMaserNo(oidi);
+//            model.ordermeasurementList.get(i).setSsCreatedOn(new Date());
+//
+//
+//            orderDetailsModel = model.getOrdermeasurementList().get(i);
+//
+//            Response resp;
+//            resp = baseOnlySave(orderDetailsModel);
+//        }
 
+        for (int i = 0; i < model.getOrderAccountDetailsList().size(); i++) {
+            OrderAccountDetailsModel accountDetailsModel= model.getOrderAccountDetailsList().get(i);
+            accountDetailsModel.setOrderMaserNo(oidi);
+            accountDetailsModel.setSsCreatedOn(new Date());
 
-            orderDetailsModel = model.getOrdermeasurementList().get(i);
 
             Response resp;
-            resp = baseOnlySave(orderDetailsModel);
+            resp = baseOnlySave(accountDetailsModel);
+            for (int j = 0; j < model.getOrderAccountDetailsList().get(i).getOrdermeasurementList().size(); j++) {
+
+                OrderDetailsModel detailsModel = model.getOrderAccountDetailsList().get(i).getOrdermeasurementList().get(j);
+                detailsModel.setOrderMaserNo(oidi);
+                detailsModel.setSsCreatedOn(new Date());
+                Response re;
+                re = baseOnlySave(detailsModel);
+            }
         }
 
-        OrderAccountDetailsModel accountDetailsModel= model.orderAccountDetails;
 
-
-
-        return baseOnlySave(accountDetailsModel);
+        return res;
     }
 
     public Response update(String reqObj) {
@@ -103,6 +119,12 @@ public class OrderRepository extends BaseRepository {
 
         }
 
+        return getListFindById(criteriaQuery(entity));
+    }
+
+    public Response findOrderByCustomerId(String id) {
+        OrderModel entity = new OrderModel();
+        entity.setCustomerCode(Integer.parseInt(id));
         return getListFindById(criteriaQuery(entity));
     }
 
@@ -156,7 +178,10 @@ public class OrderRepository extends BaseRepository {
         List<Predicate> p 	= new ArrayList<Predicate>();
 
         if (filter != null) {
-
+            if (filter.getOrderNo() >0) {
+                Predicate condition 	= builder.equal(root.get("customerCode"), filter.getOrderNo());
+                p.add(condition);
+            }
 
             if (filter.getOrderNo() >0) {
                 Predicate condition 	= builder.equal(root.get("orderNo"), filter.getOrderNo());

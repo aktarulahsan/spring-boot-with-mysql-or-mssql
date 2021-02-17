@@ -25,4 +25,8 @@ public class CustomerService {
     public Response delete(String id) {
         return repository.delete(id);
     }
+    public Response findDetailsById(String id) {
+
+        return repository.findDetailsById(id);
+    }
 }

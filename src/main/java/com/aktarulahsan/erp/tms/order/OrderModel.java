@@ -24,6 +24,7 @@ public class OrderModel extends BaseModel {
 
     @Column(name = "CUST_CODE")
     int customerCode;
+
     @Column(name = "ORDER_DATE")
     Date orderDate;
 
@@ -44,6 +45,9 @@ public class OrderModel extends BaseModel {
 
     @Transient
     List<OrderDetailsModel> ordermeasurementList;
+
+    @Transient
+    List<OrderAccountDetailsModel> orderAccountDetailsList;
 
 
 }
