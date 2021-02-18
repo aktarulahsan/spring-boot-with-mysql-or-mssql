@@ -15,7 +15,7 @@ import java.util.List;
 @Table(name = "orderad")
 public class OrderAccountDetailsModel extends BaseModel {
 //    ORDERAD_NO, ORDERM_NO, ITEMS_CODE, RA1TE, QTY, I_TOTAL_AMOUNT, CREATED_BY, CREATE_DATE, UPDATED_BY, UPDATE_DATE
-
+//    ORDERAD_NO, ORDERM_NO, I_ID, RATE, QTY, I_TOTAL_AMOUNT, COMPANY_ID, BRANCH_ID, CREATED_BY, CREATE_DATE, UPDATED_BY, UPDATE_DATE, DM
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO,generator="native")
     @GenericGenerator(name = "native",strategy = "native")
@@ -25,8 +25,13 @@ public class OrderAccountDetailsModel extends BaseModel {
     @Column(name = "ORDERM_NO")
     int orderMaserNo;
 
-    @Column(name = "ITEMS_CODE")
-    int itemsCode;
+    @Column(name = "I_ID")
+    int itemId;
+
+
+    @Column(name = "ITEM_NAME")
+    String itemName;
+
 
     @Column(name = "RATE")
     double itemRate;

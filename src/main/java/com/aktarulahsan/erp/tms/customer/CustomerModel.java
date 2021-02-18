@@ -24,7 +24,7 @@ public class CustomerModel extends BaseModel {
 
     @Id
     @Column(nullable = false, name = "CUST_CODE")
-    int cusId;
+    int customerCode;
 
 //    @Column(name = "COMPANY_ID")
 //    String companyId;

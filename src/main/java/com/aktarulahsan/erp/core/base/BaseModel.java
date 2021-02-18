@@ -16,6 +16,11 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 abstract public class BaseModel {
 
+    @Column( name = "COMPANY_ID")
+    int companyId;
+
+    @Column( name = "BRANCH_ID")
+    int branchId;
 
     @Column(name = "CREATED_BY")
     private String ssCreator;

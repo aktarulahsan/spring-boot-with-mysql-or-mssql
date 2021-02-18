@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Entity
-@Table(name = "items_model")
+@Table(name = "desigen_model")
 public class ItemModelEntity extends BaseModel {
 
 

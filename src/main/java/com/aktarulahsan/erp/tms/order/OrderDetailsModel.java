@@ -16,6 +16,10 @@ public class OrderDetailsModel extends BaseModel {
 //    ORDERD_NO, ORDERM_NO, M_ID, M_NAME, HIGHT, BODY, CREATED_BY, CREATE_DATE, UPDATED_BY, UPDATE_DATE
 
 //    ORDERD_NO, ORDERM_NO, M_ID, M_NAME, HIGHT, BODY, CREATED_BY, CREATE_DATE, UPDATED_BY, UPDATE_DATE
+
+
+//    ORDERD_NO, ORDERM_NO, I_ID, M_ID, M_NAME, M_VALUE, COMPANY_ID, BRANCH_ID, CREATED_BY, CREATE_DATE, UPDATED_BY, UPDATE_DATE, DM
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO,generator="native")
     @GenericGenerator(name = "native",strategy = "native")
@@ -24,6 +28,9 @@ public class OrderDetailsModel extends BaseModel {
 
     @Column(name = "ORDERM_NO")
     int orderMaserNo;
+
+    @Column(name = "I_ID")
+    int itemId;
 
     @Column(name = "M_ID")
     int measurementId;

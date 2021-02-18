@@ -67,7 +67,7 @@ public class CustomerRepository extends BaseRepository {
     public CustomerModel findById(String id) {
 
         CustomerModel model 	= new CustomerModel();
-        model.setCusId(Integer.parseInt(id));
+        model.setCustomerCode(Integer.parseInt(id));
         Response response = baseFindById(criteriaQuery(model));
         if (response.isSuccess()) {
 
@@ -77,7 +77,7 @@ public class CustomerRepository extends BaseRepository {
     }
     public Response findDetailsById(String id) {
         CustomerModel entity = new CustomerModel();
-        entity.setCusId(Integer.parseInt(id));
+        entity.setCustomerCode(Integer.parseInt(id));
         return baseFindById(criteriaQuery(entity));
     }
 
@@ -120,8 +120,8 @@ public class CustomerRepository extends BaseRepository {
         if (filter != null) {
 
 
-            if (filter.getCusId() >0) {
-                Predicate condition 	= builder.equal(root.get("cusId"), filter.getCusId());
+            if (filter.getCustomerCode() >0) {
+                Predicate condition 	= builder.equal(root.get("customerCode"), filter.getCustomerCode());
                 p.add(condition);
             }
 

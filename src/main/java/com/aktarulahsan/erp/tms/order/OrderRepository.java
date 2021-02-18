@@ -111,13 +111,13 @@ public class OrderRepository extends BaseRepository {
     }
 
     public Response findOrderByDeliveryStatus(HttpServletRequest request) {
-        String ssCreator = request.getParameter("ssCreator");
+        int cusId = Integer.parseInt(request.getParameter("customerCode"));
         OrderModel entity = new OrderModel();
         entity.setStatus(1);
-        if(ssCreator !="ADMIN"){
-            entity.setSsCreator(ssCreator);
+//        if(cusId !="ADMIN"){
+            entity.setCustomerCode(cusId);
 
-        }
+//        }
 
         return getListFindById(criteriaQuery(entity));
     }
@@ -180,6 +180,10 @@ public class OrderRepository extends BaseRepository {
         if (filter != null) {
             if (filter.getOrderNo() >0) {
                 Predicate condition 	= builder.equal(root.get("customerCode"), filter.getOrderNo());
+                p.add(condition);
+            }
+            if (filter.getCustomerCode() >0) {
+                Predicate condition 	= builder.equal(root.get("customerCode"), filter.getCustomerCode());
                 p.add(condition);
             }
 

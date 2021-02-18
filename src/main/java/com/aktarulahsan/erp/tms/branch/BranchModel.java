@@ -9,12 +9,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "branchname")
-public class BranchModel extends BaseModel {
+public class BranchModel {
 
 //    BRANCH_ID, BRANCH_NAME, COMPANY_ID, STATUS, CREATED_BY, CREATE_DATE, UPDATED_BY, UPDATE_DATE
 
@@ -31,7 +32,18 @@ public class BranchModel extends BaseModel {
     @Column(name = "STATUS")
     int status;
 
+    @Column(name = "CREATED_BY")
+    private String ssCreator;
 
+    @Column(name = "CREATE_DATE")
+    private Date ssCreatedOn;
+
+
+    @Column(name = "UPDATED_BY")
+    private String ssModifier;
+
+    @Column(name = "UPDATE_DATE")
+    private Date ssModifiedOn;
 
 
 }
