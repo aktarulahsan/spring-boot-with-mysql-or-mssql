@@ -50,5 +50,21 @@ public class OrderController {
         return service.findOrderByCustomerId(id);
     }
 
+    @GetMapping("/findMesurementByOrderid")
+    public Response findMesurementByOrderid(@RequestParam("orderId") String id) {
+        return service.findMesurementByOrderid(id);
+    }
+
+    @GetMapping("/findAccountInfoByOrderid")
+    public Response findAccountInfoByOrderid(@RequestParam("orderId") String id) {
+        return service.findAccountInfoByOrderid(id);
+    }
+
+    @PostMapping("/findAccountInfoByOrderidandItemId")
+    public Response findAccountInfoByOrderidandItemId(@RequestBody String reqObj) {
+
+        return service.findAccountInfoByOrderidandItemId(reqObj);
+    }
+
 
 }

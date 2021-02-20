@@ -2,12 +2,12 @@ package com.aktarulahsan.erp.tms.order;
 
 
 import com.aktarulahsan.erp.core.base.BaseRepository;
-import com.aktarulahsan.erp.tms.customer.CustomerModel;
-import com.aktarulahsan.erp.tms.setting.measurement.MeasurementModel;
+
 import com.aktarulahsan.erp.util.Response;
-import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
@@ -19,6 +19,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,6 +30,14 @@ import java.util.List;
 @Repository
 @Transactional
 public class OrderRepository extends BaseRepository {
+
+
+    @Autowired
+    private OrdertailsRepository detailsRepository;
+
+    @Autowired
+    private OrderAccountDetailsRepository accountDetailsRepository;
+
 
     public Response save(String reqObj) {
 
@@ -52,16 +64,7 @@ public class OrderRepository extends BaseRepository {
 //        model.orderAccountDetails.setOrderMaserNo(oidi);
         OrderDetailsModel orderDetailsModel =new OrderDetailsModel();
         res = baseOnlySave(model);
-//        for (int i = 0; i < model.getOrdermeasurementList().size(); i++) {
-//            model.ordermeasurementList.get(i).setOrderMaserNo(oidi);
-//            model.ordermeasurementList.get(i).setSsCreatedOn(new Date());
-//
-//
-//            orderDetailsModel = model.getOrdermeasurementList().get(i);
-//
-//            Response resp;
-//            resp = baseOnlySave(orderDetailsModel);
-//        }
+
 
         for (int i = 0; i < model.getOrderAccountDetailsList().size(); i++) {
             OrderAccountDetailsModel accountDetailsModel= model.getOrderAccountDetailsList().get(i);
@@ -87,14 +90,87 @@ public class OrderRepository extends BaseRepository {
 
     public Response update(String reqObj) {
 
-        OrderModel  model = objectMapperReadValue(reqObj, OrderModel.class);
+        Response res = new Response();
+        JSONArray detailsList = new JSONArray();
+        String message = "";
+
+        OrderModel model = objectMapperReadValue(reqObj, OrderModel.class);
+
+        JSONObject json = new JSONObject(reqObj);
+
+        model.setSsModifiedOn(new Date());
 
 
-        model.setSsCreatedOn(new Date());
 
-        return baseSaveOrUpdate(model);
+
+
+
+        res = baseSaveOrUpdate(model);
+//                baseOnlySave(model);
+        Response dres = detailsRepository.findMesurementByOrderid(String.valueOf(model.getOrderNo()));
+
+       if(dres.isSuccess()){
+           detailsRepository.delete(String.valueOf(model.getOrderNo()));
+       }
+         Response ps = accountDetailsRepository.findAccountInfoByOrderid(String.valueOf(model.getOrderNo()));
+        if(ps.isSuccess()){
+            Response ds = accountDetailsRepository.delete(String.valueOf(model.getOrderNo()));
+            String a = "0";
+        }
+
+        for (int i = 0; i < model.getOrderAccountDetailsList().size(); i++) {
+            OrderAccountDetailsModel accountDetailsModel= model.getOrderAccountDetailsList().get(i);
+            accountDetailsModel.setAid(0);
+            accountDetailsModel.setOrderMaserNo(model.getOrderNo());
+            accountDetailsModel.setSsCreatedOn(model.getSsCreatedOn());
+            accountDetailsModel.setSsCreatedOn(new Date());
+
+
+            Response resp;
+            resp = baseOnlySave(accountDetailsModel);
+            for (int j = 0; j < model.getOrderAccountDetailsList().get(i).getOrdermeasurementList().size(); j++) {
+
+                OrderDetailsModel detailsModel = model.getOrderAccountDetailsList().get(i).getOrdermeasurementList().get(j);
+                detailsModel.setOrderDetailsNo(0);
+                detailsModel.setOrderMaserNo(model.getOrderNo());
+                accountDetailsModel.setSsCreatedOn(model.getSsCreatedOn());
+                detailsModel.setSsCreatedOn(new Date());
+                Response re;
+                re = baseOnlySave(detailsModel);
+            }
+        }
+
+
+        return res;
+
+
 
     }
+
+    public Response deleteAllWithoutItemNo(Long consultationNo) {
+        Connection con = null;
+        ResultSet rs = null;
+        PreparedStatement pstm = null;
+        con = getOraConnection();
+
+        try {
+
+            pstm = con.prepareStatement(integrationStatement.deleteAllInvestigationDataWithOutItemNo());
+            pstm.setLong(1, consultationNo); // OPD_CONSULTATION_NO
+            pstm.executeUpdate();
+
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+            finalyConPstmRs(con, pstm, rs);
+
+        }
+
+        return getSuccessResponse("delete Successfully");
+    }
+
+
 
     public Response delete(String id) {
         if (id == null) {

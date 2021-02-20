@@ -12,6 +12,11 @@ public class OrderService {
     @Autowired
     private OrderRepository repository;
 
+    @Autowired
+    private  OrdertailsRepository orderDetailsService;
+    @Autowired
+    private OrderAccountDetailsRepository adService;
+
 
     public Response list(String reqObj) {
         return repository.list(reqObj);
@@ -37,5 +42,19 @@ public class OrderService {
     public Response findOrderByCustomerId(String id) {
 
         return repository.findOrderByCustomerId(id);
+    }
+    public Response findMesurementByOrderid(String id) {
+
+        return orderDetailsService.findMesurementByOrderid(id);
+    }
+
+    public Response findAccountInfoByOrderid(String id) {
+
+        return adService.findAccountInfoByOrderid(id);
+    }
+
+
+    public Response findAccountInfoByOrderidandItemId(String reqObj) {
+        return orderDetailsService.findAccountInfoByOrderidandItemId(reqObj);
     }
 }
