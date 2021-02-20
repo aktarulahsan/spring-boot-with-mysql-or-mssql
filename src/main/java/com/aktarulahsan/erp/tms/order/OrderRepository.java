@@ -147,28 +147,28 @@ public class OrderRepository extends BaseRepository {
 
     }
 
-    public Response deleteAllWithoutItemNo(Long consultationNo) {
-        Connection con = null;
-        ResultSet rs = null;
-        PreparedStatement pstm = null;
-        con = getOraConnection();
-
-        try {
-
-            pstm = con.prepareStatement(integrationStatement.deleteAllInvestigationDataWithOutItemNo());
-            pstm.setLong(1, consultationNo); // OPD_CONSULTATION_NO
-            pstm.executeUpdate();
-
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } finally {
-            finalyConPstmRs(con, pstm, rs);
-
-        }
-
-        return getSuccessResponse("delete Successfully");
-    }
+//    public Response deleteAllWithoutItemNo(Long consultationNo) {
+//        Connection con = null;
+//        ResultSet rs = null;
+//        PreparedStatement pstm = null;
+//        con = getOraConnection();
+//
+//        try {
+//
+//            pstm = con.prepareStatement(integrationStatement.deleteAllInvestigationDataWithOutItemNo());
+//            pstm.setLong(1, consultationNo); // OPD_CONSULTATION_NO
+//            pstm.executeUpdate();
+//
+//        } catch (SQLException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        } finally {
+//            finalyConPstmRs(con, pstm, rs);
+//
+//        }
+//
+//        return getSuccessResponse("delete Successfully");
+//    }
 
 
 
