@@ -18,21 +18,45 @@ import java.util.List;
 @Transactional
 public class OrderAccountDetailsRepository   extends BaseRepository {
 
-
-
-    public Response delete(String id) {
-        if (id == null) {
+    ArrayList<OrderAccountDetailsModel> list = new ArrayList<OrderAccountDetailsModel>();
+    public Response delete(int id) {
+        if (id ==0) {
             return getErrorResponse("Id is blank");
         }
 
-        OrderAccountDetailsModel  model = findById(id);
+        Response  res = findDetailsById(String.valueOf(id));
 
-        if (model != null) {
-            return baseDelete(model);
+        if(res.isSuccess()){
+            list = (ArrayList<OrderAccountDetailsModel>) res.getItems();
+            for (int i = 0; i < list.size(); i++) {
+                baseDelete(list.get(i));
+            }
+            return res;
         }
 
         return getErrorResponse("Id not found");
     }
+
+    public Response findDetailsById(String id) {
+        OrderAccountDetailsModel entity = new OrderAccountDetailsModel();
+        entity.setOrderMaserNo(Integer.parseInt(id));
+//        roomEntity.setActiveStatus(1);
+        return getListFindById(criteriaQuery(entity));
+    }
+
+//    public Response delete(String id) {
+//        if (id == null) {
+//            return getErrorResponse("Id is blank");
+//        }
+//
+//        OrderAccountDetailsModel  model = findById(id);
+//
+//        if (model != null) {
+//            return baseDelete(model);
+//        }
+//
+//        return getErrorResponse("Id not found");
+//    }
 
 //    public Response findOrderByDeliveryStatus(HttpServletRequest request) {
 //        int cusId = Integer.parseInt(request.getParameter("customerCode"));

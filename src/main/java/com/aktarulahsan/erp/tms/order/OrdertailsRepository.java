@@ -19,19 +19,30 @@ import java.util.List;
 @Transactional
 public class OrdertailsRepository  extends BaseRepository {
 
-
-    public Response delete(String id) {
-        if (id == null) {
+    ArrayList<OrderDetailsModel> list = new ArrayList<OrderDetailsModel>();
+    public Response delete(int id) {
+        if (id ==0) {
             return getErrorResponse("Id is blank");
         }
 
-        OrderDetailsModel  model = findById(id);
+        Response  res = findDetailsById(String.valueOf(id));
 
-        if (model != null) {
-            return baseDelete(model);
+        if(res.isSuccess()){
+            list = (ArrayList<OrderDetailsModel>) res.getItems();
+            for (int i = 0; i < list.size(); i++) {
+                baseDelete(list.get(i));
+            }
+            return res;
         }
 
         return getErrorResponse("Id not found");
+    }
+
+    public Response findDetailsById(String id) {
+        OrderDetailsModel entity = new OrderDetailsModel();
+        entity.setOrderMaserNo(Integer.parseInt(id));
+//        roomEntity.setActiveStatus(1);
+        return getListFindById(criteriaQuery(entity));
     }
 
 //    public Response findOrderByDeliveryStatus(HttpServletRequest request) {
@@ -64,10 +75,10 @@ public class OrdertailsRepository  extends BaseRepository {
         return getListFindById(criteriaQuery(entity));
     }
 
-    public OrderDetailsModel findById(String id) {
+    public OrderDetailsModel findById(int id) {
 
         OrderDetailsModel model 	= new OrderDetailsModel();
-        model.setOrderMaserNo(Integer.parseInt(id));
+        model.setOrderMaserNo(id);
         Response response = baseFindById(criteriaQuery(model));
         if (response.isSuccess()) {
 

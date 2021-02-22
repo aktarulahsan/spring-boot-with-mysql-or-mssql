@@ -93,9 +93,9 @@ public class OrderRepository extends BaseRepository {
         Response res = new Response();
         JSONArray detailsList = new JSONArray();
         String message = "";
-
+        int orderId;
         OrderModel model = objectMapperReadValue(reqObj, OrderModel.class);
-
+        orderId = model.getOrderNo();
         JSONObject json = new JSONObject(reqObj);
 
         model.setSsModifiedOn(new Date());
@@ -107,21 +107,22 @@ public class OrderRepository extends BaseRepository {
 
         res = baseSaveOrUpdate(model);
 //                baseOnlySave(model);
-        Response dres = detailsRepository.findMesurementByOrderid(String.valueOf(model.getOrderNo()));
+        Response dres = detailsRepository.findDetailsById(String.valueOf(orderId));
 
-       if(dres.isSuccess()){
-           detailsRepository.delete(String.valueOf(model.getOrderNo()));
+       if(dres !=null){
+           Response ds = detailsRepository.delete(orderId);
+           String a = "0";
        }
-         Response ps = accountDetailsRepository.findAccountInfoByOrderid(String.valueOf(model.getOrderNo()));
-        if(ps.isSuccess()){
-            Response ds = accountDetailsRepository.delete(String.valueOf(model.getOrderNo()));
+        Response ps = accountDetailsRepository.findDetailsById(String.valueOf(orderId));
+        if(ps !=null){
+            Response ds = accountDetailsRepository.delete(orderId);
             String a = "0";
         }
 
         for (int i = 0; i < model.getOrderAccountDetailsList().size(); i++) {
             OrderAccountDetailsModel accountDetailsModel= model.getOrderAccountDetailsList().get(i);
             accountDetailsModel.setAid(0);
-            accountDetailsModel.setOrderMaserNo(model.getOrderNo());
+            accountDetailsModel.setOrderMaserNo(orderId);
             accountDetailsModel.setSsCreatedOn(model.getSsCreatedOn());
             accountDetailsModel.setSsCreatedOn(new Date());
 
@@ -132,7 +133,7 @@ public class OrderRepository extends BaseRepository {
 
                 OrderDetailsModel detailsModel = model.getOrderAccountDetailsList().get(i).getOrdermeasurementList().get(j);
                 detailsModel.setOrderDetailsNo(0);
-                detailsModel.setOrderMaserNo(model.getOrderNo());
+                detailsModel.setOrderMaserNo(orderId);
                 accountDetailsModel.setSsCreatedOn(model.getSsCreatedOn());
                 detailsModel.setSsCreatedOn(new Date());
                 Response re;
