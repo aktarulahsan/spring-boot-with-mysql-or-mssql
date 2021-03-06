@@ -25,6 +25,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableAuthorizationServer
+
 public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
 
 //	@Value("${check-user-scopes}")

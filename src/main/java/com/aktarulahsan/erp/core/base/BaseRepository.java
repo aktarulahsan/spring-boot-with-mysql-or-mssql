@@ -10,6 +10,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,6 +112,18 @@ public class BaseRepository  implements CommonFunctions {
         }
 
     }
+    public void finallyOutputStream(ByteArrayOutputStream baos) {
+
+        if(baos != null) {
+            try {
+                baos.close();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+    }
+
 
 
     public Response baseDelete(Object obj) {
