@@ -5,7 +5,7 @@
 		<![CDATA[]]>
 	</queryString>
 	<background>
-		<band splitType="Stretch"/>
+		<band splitType="Stretch"/> 
 	</background>
 	<title>
 		<band height="79" splitType="Stretch"/>
