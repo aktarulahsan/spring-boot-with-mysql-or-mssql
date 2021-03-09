@@ -5,6 +5,7 @@ import com.aktarulahsan.erp.core.base.BaseRepository;
 import com.aktarulahsan.erp.core.reportConfig.reportConfig.CoreJasperService;
 import com.aktarulahsan.erp.core.reportConfig.reportConfig.CusJasperReportDef;
 import com.aktarulahsan.erp.tms.order.OrderModel;
+import com.aktarulahsan.erp.tms.order.OrderRepository;
 import com.aktarulahsan.erp.util.CommonFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -21,6 +22,12 @@ public class OrderReportRepository extends BaseRepository {
     @Autowired
     CoreJasperService coreJasperService;
 
+    @Autowired
+    OrderRepository repository;
+
+
+
+
     public CusJasperReportDef demoReport() {
 
         OrderReportDato demoDto = new OrderReportDato();
@@ -32,6 +39,10 @@ public class OrderReportRepository extends BaseRepository {
 //        demoDto.setCompanyName("Global  IT");
 //        demoDto.setCompanyAddress("Mirpur 10, Dhaka");
 //        demoDto.setGShear("0");
+
+        OrderModel model = new OrderModel();
+        model =  repository.findById("992309731");
+
 
         demoDto.setOrderNo(454545);
         demoDto.setCustomerCode(101);

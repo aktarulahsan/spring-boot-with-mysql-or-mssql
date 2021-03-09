@@ -3,6 +3,7 @@ package com.aktarulahsan.erp.tms.order;
 
 import com.aktarulahsan.erp.core.base.BaseRepository;
 
+import com.aktarulahsan.erp.tms.customer.CustomerModel;
 import com.aktarulahsan.erp.util.Response;
 
 import org.json.JSONArray;
@@ -217,6 +218,12 @@ public class OrderRepository extends BaseRepository {
         return null;
     }
 
+
+    public Response findOrderInfo(String id) {
+        OrderModel entity = new OrderModel();
+        entity.setOrderNo(Integer.parseInt(id));
+        return baseFindById(criteriaQuery(entity));
+    }
 
 
 

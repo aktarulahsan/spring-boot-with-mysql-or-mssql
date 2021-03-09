@@ -67,4 +67,14 @@ public class OrderController {
     }
 
 
+
+//    @GetMapping("/findById")
+//    public OrderModel findById(@RequestParam("orderId") String id) {
+//        return service.findById(id);
+//    }
+@GetMapping("/findById")
+public Response findById(@RequestParam String id) {
+    return service.findl3Id(id);
+}
+
 }

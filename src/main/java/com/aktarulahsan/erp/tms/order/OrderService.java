@@ -57,4 +57,16 @@ public class OrderService {
     public Response findAccountInfoByOrderidandItemId(String reqObj) {
         return orderDetailsService.findAccountInfoByOrderidandItemId(reqObj);
     }
+
+    public OrderModel findById(String id) {
+
+        return repository.findById(id);
+    }
+
+    public Response findl3Id(String id) {
+
+        return repository.findOrderInfo(id);
+    }
+
+
 }

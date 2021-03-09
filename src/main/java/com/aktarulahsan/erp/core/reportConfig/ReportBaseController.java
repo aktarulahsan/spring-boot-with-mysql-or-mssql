@@ -27,7 +27,7 @@ public class ReportBaseController {
 			String contentDisposition = forceDownload == true ? "attachment;filename=\""+outputFileName+"\"": "filename=\""+outputFileName+"\"";
 		    return ResponseEntity
 		  	      .ok()
-		          .header("Access-Control-Allow-Origin", "*")
+//		          .header("Access-Control-Allow-Origin", "*")
 		  	      .header("Content-Type",  jasperReport.getReportFormat().getMimeType()+";charset=UTF-8")
 		  	      .header("Content-Disposition", contentDisposition)
 		  	      .body(jasperReport.getContent());

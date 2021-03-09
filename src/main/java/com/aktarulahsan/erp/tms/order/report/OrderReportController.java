@@ -23,10 +23,17 @@ public class OrderReportController extends ReportBaseController {
 //    }
 
 
-    @GetMapping(value = "/rolereport")
-    public ResponseEntity<byte[]> appointmentSlip() throws IOException {
-        CusJasperReportDef report = reportService.demoReport();
-        return respondReportOutput(report, false);
+//    @GetMapping(value = "/rolereport")
+//    public ResponseEntity<byte[]> appointmentSlip() throws IOException {
+//        CusJasperReportDef report = reportService.demoReport();
+//        return respondReportOutput(report, false);
+//
+//    }
 
+    @PostMapping(value = "/rolereport")
+    public ResponseEntity<byte[]> test(@RequestBody String reqObj) throws IOException {
+        CusJasperReportDef report = reportService.demoReport();
+        return respondReportOutputWithoutHeader(report, false);
     }
+
 }

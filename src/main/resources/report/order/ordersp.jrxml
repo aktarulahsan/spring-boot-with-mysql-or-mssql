@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ordersp" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fb92821e-5406-4ff8-9d0c-66499bd3355b">
+	<subDataset name="mesurmentList" uuid="002c70a7-115f-46b0-88d8-d1dc1fead05a">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="Field_1" class="java.lang.String"/>
+	</subDataset>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -65,6 +72,15 @@
 				<reportElement x="0" y="37" width="80" height="16" uuid="85fb2119-739f-46cd-9064-7d6ffe6b9a56"/>
 				<textFieldExpression><![CDATA["Total Amount: "]]></textFieldExpression>
 			</textField>
+			<componentElement>
+				<reportElement x="2" y="58" width="548" height="30" uuid="5d4205ca-3f78-44b9-b8e4-f431ab6f3b31"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="mesurmentList" uuid="174120ab-2584-4129-98e5-0072ef9ca5b8">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="30" width="548"/>
+				</jr:list>
+			</componentElement>
 		</band>
 	</detail>
 	<columnFooter>
