@@ -71,18 +71,21 @@ public class OrderRepository extends BaseRepository {
             OrderAccountDetailsModel accountDetailsModel= model.getOrderAccountDetailsList().get(i);
             accountDetailsModel.setOrderMaserNo(oidi);
             accountDetailsModel.setSsCreatedOn(new Date());
-
+            accountDetailsModel.detailsModel.setOrderd_no(oidi);
 
             Response resp;
             resp = baseOnlySave(accountDetailsModel);
-            for (int j = 0; j < model.getOrderAccountDetailsList().get(i).getOrdermeasurementList().size(); j++) {
+            Response rs;
+            rs = baseOnlySave(accountDetailsModel.detailsModel);
 
-                OrderDetailsModel detailsModel = model.getOrderAccountDetailsList().get(i).getOrdermeasurementList().get(j);
-                detailsModel.setOrderMaserNo(oidi);
-                detailsModel.setSsCreatedOn(new Date());
-                Response re;
-                re = baseOnlySave(detailsModel);
-            }
+//            for (int j = 0; j < model.getOrderAccountDetailsList().get(i).getOrdermeasurementList().size(); j++) {
+//
+//                OrderDetailsModel detailsModel = model.getOrderAccountDetailsList().get(i).getOrdermeasurementList().get(j);
+//                detailsModel.setOrderMaserNo(oidi);
+//                detailsModel.setSsCreatedOn(new Date());
+//                Response re;
+//                re = baseOnlySave(detailsModel);
+//            }
         }
 
 

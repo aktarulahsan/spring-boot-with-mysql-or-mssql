@@ -124,8 +124,6 @@ public class CategoryRepository extends BaseRepository {
                 Predicate condition 	= builder.equal(root.get("categoryId"), filter.getCategoryId());
                 p.add(condition);
             }
-
-
         }
 
         return p;
