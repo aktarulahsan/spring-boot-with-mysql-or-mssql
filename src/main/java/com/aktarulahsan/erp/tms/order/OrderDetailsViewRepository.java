@@ -22,14 +22,14 @@ public class OrderDetailsViewRepository extends BaseRepository {
 
     public Response findAccountInfoByOrderid(String id) {
         OrdertailsView entity = new OrdertailsView();
-        entity.setOrdermNo(Integer.parseInt(id));
+        entity.setOrderNo(Integer.parseInt(id));
         return getListFindById(criteriaQuery(entity));
     }
 
     public OrdertailsView findById(String id) {
 
         OrdertailsView model 	= new OrdertailsView();
-        model.setOrdermNo(Integer.parseInt(id));
+        model.setOrderNo(Integer.parseInt(id));
         Response response = baseFindById(criteriaQuery(model));
         if (response.isSuccess()) {
 
@@ -76,8 +76,8 @@ public class OrderDetailsViewRepository extends BaseRepository {
         List<Predicate> p 	= new ArrayList<Predicate>();
 
         if (filter != null) {
-            if (filter.getOrdermNo() >0) {
-                Predicate condition 	= builder.equal(root.get("orderMaserNo"), filter.getOrdermNo());
+            if (filter.getOrderNo() >0) {
+                Predicate condition 	= builder.equal(root.get("orderNo"), filter.getOrderNo());
                 p.add(condition);
             }
 //            if (filter.ge() >0) {

@@ -32,8 +32,16 @@ public class OrderReportController extends ReportBaseController {
 
     @PostMapping(value = "/rolereport")
     public ResponseEntity<byte[]> test(@RequestBody String reqObj) throws IOException {
-        CusJasperReportDef report = reportService.demoReport();
+        CusJasperReportDef report = reportService.demoReport(reqObj);
         return respondReportOutputWithoutHeader(report, false);
     }
+
+//    @PostMapping(value = "/labelBarcode")
+//    public ResponseEntity<byte[]> labelBarcode(@RequestParam("labNos") String[] labNos) throws IOException {
+//
+//        CusJasperReportDef report = reportService.labelBarcode(labNos);
+//        return respondReportOutput(report, false);
+//
+//    }
 
 }

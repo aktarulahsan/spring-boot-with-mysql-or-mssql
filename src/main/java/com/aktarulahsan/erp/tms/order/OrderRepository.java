@@ -3,7 +3,8 @@ package com.aktarulahsan.erp.tms.order;
 
 import com.aktarulahsan.erp.core.base.BaseRepository;
 
-import com.aktarulahsan.erp.tms.customer.CustomerModel;
+import com.aktarulahsan.erp.tms.order.model.OrderDetailsModels;
+import com.aktarulahsan.erp.tms.order.model.OrderMasterModel;
 import com.aktarulahsan.erp.util.Response;
 
 import org.json.JSONArray;
@@ -20,10 +21,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpServletRequest;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -49,8 +46,10 @@ public class OrderRepository extends BaseRepository {
         Response res = new Response();
         JSONArray detailsList = new JSONArray();
         String message = "";
+        OrderDetailsModels detailsModel = new OrderDetailsModels();
 
-        OrderModel model = objectMapperReadValue(reqObj, OrderModel.class);
+//        OrderMasterModel model = objectMapperReadValue(reqObj, OrderMasterModel.class);
+        OrderMasterModel model = objectMapperReadValue(reqObj , OrderMasterModel.class);
 
         JSONObject json = new JSONObject(reqObj);
 
@@ -71,12 +70,19 @@ public class OrderRepository extends BaseRepository {
             OrderAccountDetailsModel accountDetailsModel= model.getOrderAccountDetailsList().get(i);
             accountDetailsModel.setOrderMaserNo(oidi);
             accountDetailsModel.setSsCreatedOn(new Date());
+            accountDetailsModel.setItemTotalAmount(accountDetailsModel.getQty()*accountDetailsModel.getItemRate());
             accountDetailsModel.detailsModel.setOrderd_no(oidi);
 
+            detailsModel = accountDetailsModel.detailsModel;
+            detailsModel.setOrderd_no(oidi);
+            detailsModel.setCust_code(model.getCustomerCode());
+            detailsModel.setQty(accountDetailsModel.getQty());
+            detailsModel.setItem_total_val(accountDetailsModel.getQty()*accountDetailsModel.getItemRate());
+            detailsModel.setItem_price(accountDetailsModel.getItemRate());
             Response resp;
             resp = baseOnlySave(accountDetailsModel);
             Response rs;
-            rs = baseOnlySave(accountDetailsModel.detailsModel);
+            rs = baseOnlySave(detailsModel);
 
 //            for (int j = 0; j < model.getOrderAccountDetailsList().get(i).getOrdermeasurementList().size(); j++) {
 //
@@ -98,13 +104,13 @@ public class OrderRepository extends BaseRepository {
         JSONArray detailsList = new JSONArray();
         String message = "";
         int orderId;
-        OrderModel model = objectMapperReadValue(reqObj, OrderModel.class);
+        OrderMasterModel model = objectMapperReadValue(reqObj, OrderMasterModel.class);
         orderId = model.getOrderNo();
         JSONObject json = new JSONObject(reqObj);
 
         model.setSsModifiedOn(new Date());
 
-
+        OrderDetailsModels detailsModel = new OrderDetailsModels();
 
 
 
@@ -133,16 +139,28 @@ public class OrderRepository extends BaseRepository {
 
             Response resp;
             resp = baseOnlySave(accountDetailsModel);
-            for (int j = 0; j < model.getOrderAccountDetailsList().get(i).getOrdermeasurementList().size(); j++) {
 
-                OrderDetailsModel detailsModel = model.getOrderAccountDetailsList().get(i).getOrdermeasurementList().get(j);
-                detailsModel.setOrderDetailsNo(0);
-                detailsModel.setOrderMaserNo(orderId);
-                accountDetailsModel.setSsCreatedOn(model.getSsCreatedOn());
-                detailsModel.setSsCreatedOn(new Date());
-                Response re;
+
+            detailsModel = accountDetailsModel.detailsModel;
+            detailsModel.setOrderd_no(orderId);
+            detailsModel.setCust_code(model.getCustomerCode());
+            detailsModel.setQty(accountDetailsModel.getQty());
+            detailsModel.setItem_total_val(accountDetailsModel.getQty()*accountDetailsModel.getItemRate());
+            detailsModel.setItem_price(accountDetailsModel.getItemRate());
+
+            Response re;
                 re = baseOnlySave(detailsModel);
-            }
+
+//            for (int j = 0; j < model.getOrderAccountDetailsList().get(i).getOrdermeasurementList().size(); j++) {
+//
+//                OrderDetailsModel detailsModel = model.getOrderAccountDetailsList().get(i).getOrdermeasurementList().get(j);
+//                detailsModel.setOrderDetailsNo(0);
+//                detailsModel.setOrderMaserNo(orderId);
+//                accountDetailsModel.setSsCreatedOn(model.getSsCreatedOn());
+//                detailsModel.setSsCreatedOn(new Date());
+//                Response re;
+//                re = baseOnlySave(detailsModel);
+//            }
         }
 
 
@@ -182,7 +200,7 @@ public class OrderRepository extends BaseRepository {
             return getErrorResponse("Id is blank");
         }
 
-        OrderModel  model = findById(id);
+        OrderMasterModel  model = findById(id);
 
         if (model != null) {
             return baseDelete(model);
@@ -193,7 +211,7 @@ public class OrderRepository extends BaseRepository {
 
     public Response findOrderByDeliveryStatus(HttpServletRequest request) {
         int cusId = Integer.parseInt(request.getParameter("customerCode"));
-        OrderModel entity = new OrderModel();
+        OrderMasterModel entity = new OrderMasterModel();
         entity.setStatus(1);
 //        if(cusId !="ADMIN"){
             entity.setCustomerCode(cusId);
@@ -204,26 +222,26 @@ public class OrderRepository extends BaseRepository {
     }
 
     public Response findOrderByCustomerId(String id) {
-        OrderModel entity = new OrderModel();
+        OrderMasterModel entity = new OrderMasterModel();
         entity.setCustomerCode(Integer.parseInt(id));
         return getListFindById(criteriaQuery(entity));
     }
 
-    public OrderModel findById(String id) {
+    public OrderMasterModel findById(String id) {
 
-        OrderModel model 	= new OrderModel();
+        OrderMasterModel model 	= new OrderMasterModel();
         model.setOrderNo(Integer.parseInt(id));
         Response response = baseFindById(criteriaQuery(model));
         if (response.isSuccess()) {
 
-            return getValueFromObject(response.getObj(), OrderModel.class);
+            return getValueFromObject(response.getObj(), OrderMasterModel.class);
         }
         return null;
     }
 
 
     public Response findOrderInfo(String id) {
-        OrderModel entity = new OrderModel();
+        OrderMasterModel entity = new OrderMasterModel();
         entity.setOrderNo(Integer.parseInt(id));
         return baseFindById(criteriaQuery(entity));
     }
@@ -233,14 +251,14 @@ public class OrderRepository extends BaseRepository {
 
     public Response list(String reqObj) {
 
-        OrderModel branchModel = null;
+        OrderMasterModel branchModel = null;
         if (null != reqObj) {
-            branchModel = objectMapperReadValue(reqObj, OrderModel.class);
+            branchModel = objectMapperReadValue(reqObj, OrderMasterModel.class);
         }
         return baseList(criteriaQuery(branchModel));
     }
 
-    private CriteriaQuery criteriaQuery(OrderModel filter) {
+    private CriteriaQuery criteriaQuery(OrderMasterModel filter) {
         init();
 
         List<Predicate> p 	= new ArrayList<Predicate>();
@@ -253,7 +271,7 @@ public class OrderRepository extends BaseRepository {
         }
         return criteria;
     }
-    private List<Predicate> criteriaCondition(OrderModel filter, CriteriaBuilder builder, Root<OrderModel> root) {
+    private List<Predicate> criteriaCondition(OrderMasterModel filter, CriteriaBuilder builder, Root<OrderMasterModel> root) {
 
         if (builder == null) {
             builder 		= super.builder;
@@ -265,10 +283,10 @@ public class OrderRepository extends BaseRepository {
         List<Predicate> p 	= new ArrayList<Predicate>();
 
         if (filter != null) {
-            if (filter.getOrderNo() >0) {
-                Predicate condition 	= builder.equal(root.get("customerCode"), filter.getOrderNo());
-                p.add(condition);
-            }
+//            if (filter.getOrderNo() >0) {
+//                Predicate condition 	= builder.equal(root.get("orderNo"), filter.getOrderNo());
+//                p.add(condition);
+//            }
             if (filter.getCustomerCode() >0) {
                 Predicate condition 	= builder.equal(root.get("customerCode"), filter.getCustomerCode());
                 p.add(condition);
@@ -286,7 +304,7 @@ public class OrderRepository extends BaseRepository {
     }
 
     private void init() {
-        initEntityManagerBuilderCriteriaQueryRoot(OrderModel.class);
+        initEntityManagerBuilderCriteriaQueryRoot(OrderMasterModel.class);
         CriteriaBuilder builder 	= super.builder;
         CriteriaQuery criteria 		= super.criteria;
         Root root 					= super.root;

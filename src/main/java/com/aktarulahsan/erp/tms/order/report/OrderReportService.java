@@ -15,9 +15,9 @@ public class OrderReportService {
 //    public CusJasperReportDef barcodeListRePrintByInvoiceId(String reqObj) {
 //        return reportRepository.demoReport(8888);
 //    }
-    public CusJasperReportDef demoReport() {
+    public CusJasperReportDef demoReport(String reqObj) {
 
-        return reportRepository.demoReport();
+        return reportRepository.demoReport(reqObj);
     }
 
 }

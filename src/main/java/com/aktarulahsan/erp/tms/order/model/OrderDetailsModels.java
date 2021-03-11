@@ -1,4 +1,4 @@
-package com.aktarulahsan.erp.tms.order;
+package com.aktarulahsan.erp.tms.order.model;
 
 import com.aktarulahsan.erp.core.base.BaseModel;
 import lombok.Getter;

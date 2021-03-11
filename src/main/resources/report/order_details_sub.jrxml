@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="billing_details_sub" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="842" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="00cb42df-d42e-41ca-a8ee-aa9fbf2ff394">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.report.description" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<field name="invoiceDate" class="java.util.Date"/>
+	<field name="invoiceId" class="java.lang.String"/>
+	<field name="patName" class="java.lang.String"/>
+	<field name="refDocName" class="java.lang.String"/>
+	<field name="salesByName" class="java.lang.String"/>
+	<field name="sales" class="java.lang.Long"/>
+	<field name="vat" class="java.lang.Long"/>
+	<field name="urgentFee" class="java.lang.Long"/>
+	<field name="serviceCharge" class="java.lang.Long"/>
+	<field name="totalCancel" class="java.lang.Long"/>
+	<field name="totalSales" class="java.lang.Long"/>
+	<field name="totalDiscAmt" class="java.lang.Long"/>
+	<field name="netSale" class="java.lang.Long"/>
+	<variable name="SALES_SUM" class="java.lang.Long" resetType="Group" resetGroup="InvoiceDate" calculation="Sum">
+		<variableExpression><![CDATA[$F{sales}]]></variableExpression>
+	</variable>
+	<variable name="VAT_SUM" class="java.lang.Long" resetType="Group" resetGroup="InvoiceDate" calculation="Sum">
+		<variableExpression><![CDATA[$F{vat}]]></variableExpression>
+	</variable>
+	<variable name="NET_SALES_SUM" class="java.lang.Long" resetType="Group" resetGroup="InvoiceDate" calculation="Sum">
+		<variableExpression><![CDATA[$F{netSale}]]></variableExpression>
+	</variable>
+	<variable name="URGENT_FEE_SUM" class="java.lang.Long" resetType="Group" resetGroup="InvoiceDate" calculation="Sum">
+		<variableExpression><![CDATA[$F{urgentFee}]]></variableExpression>
+	</variable>
+	<variable name="SERVICE_CHARGE_SUM" class="java.lang.Long" resetType="Group" resetGroup="InvoiceDate" calculation="Sum">
+		<variableExpression><![CDATA[$F{serviceCharge}]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_CANCEL_SUM" class="java.lang.Long" resetType="Group" resetGroup="InvoiceDate" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalCancel}]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_SALES_SUM" class="java.lang.Long" resetType="Group" resetGroup="InvoiceDate" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalSales}]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_DISC_AMT_SUM" class="java.lang.Long" resetType="Group" resetGroup="InvoiceDate" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalDiscAmt}]]></variableExpression>
+	</variable>
+	<variable name="FG_SALES_SUM" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{sales}]]></variableExpression>
+	</variable>
+	<variable name="FG_VAT_SUM" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{vat}]]></variableExpression>
+	</variable>
+	<variable name="FG_NET_SALES_SUM" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{netSale}]]></variableExpression>
+	</variable>
+	<variable name="FG_URGENT_FEE_SUM" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{urgentFee}]]></variableExpression>
+	</variable>
+	<variable name="FG_SERVICE_CHARGE_SUM" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{serviceCharge}]]></variableExpression>
+	</variable>
+	<variable name="FG_TOTAL_CANCEL_SUM" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalCancel}]]></variableExpression>
+	</variable>
+	<variable name="FG_TOTAL_SALES_SUM" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalSales}]]></variableExpression>
+	</variable>
+	<variable name="FG_TOTAL_DISC_AMT_SUM" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalDiscAmt}]]></variableExpression>
+	</variable>
+	<group name="InvoiceDate">
+		<groupExpression><![CDATA[$F{invoiceDate}]]></groupExpression>
+		<groupHeader>
+			<band height="1">
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="278">
+				<staticText>
+					<reportElement x="50" y="-1" width="320" height="15" uuid="ddd80b4a-24a6-4651-abeb-ae8b61ddb883">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<box>
+						<leftPen lineWidth="0.25" lineStyle="Dotted"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Segoe UI" size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Sub Total : ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="370" y="-1" width="50" height="15" uuid="d8de4c76-495c-4f48-a43b-941689f87ef2">
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+						<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Segoe UI" size="6" isBold="true"/>
+						<paragraph leftIndent="0" rightIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SALES_SUM}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="420" y="-1" width="50" height="15" uuid="25217028-f766-429c-a752-2891785a0896">
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+						<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Segoe UI" size="6" isBold="true"/>
+						<paragraph leftIndent="0" rightIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{VAT_SUM}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="720" y="-1" width="60" height="15" uuid="4d165313-2292-4f3f-ab36-d8a5d010c3e9">
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+						<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Segoe UI" size="6" isBold="true"/>
+						<paragraph leftIndent="0" rightIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{NET_SALES_SUM}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="470" y="-1" width="50" height="15" uuid="22f37299-af67-46b2-b28b-ac7c5485e8b9">
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+						<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Segoe UI" size="6" isBold="true"/>
+						<paragraph leftIndent="0" rightIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{URGENT_FEE_SUM}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="520" y="-1" width="50" height="15" uuid="14e2697e-da71-48a4-90d5-76f386537508">
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+						<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Segoe UI" size="6" isBold="true"/>
+						<paragraph leftIndent="0" rightIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SERVICE_CHARGE_SUM}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="570" y="-1" width="50" height="15" uuid="113e92d3-9e9d-4ce1-94e7-40536efc2987">
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+						<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Segoe UI" size="6" isBold="true"/>
+						<paragraph leftIndent="0" rightIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{TOTAL_CANCEL_SUM}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="620" y="-1" width="50" height="15" uuid="9b3d4b7a-3f8b-4d43-89ff-b1366737d079">
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+						<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Segoe UI" size="6" isBold="true"/>
+						<paragraph leftIndent="0" rightIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{TOTAL_SALES_SUM}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="670" y="-1" width="50" height="15" uuid="8ca7adbf-8d5c-49bf-97be-bf3ccdb6494d">
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+						<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Segoe UI" size="6" isBold="true"/>
+						<paragraph leftIndent="0" rightIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{TOTAL_DISC_AMT_SUM}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="-1" width="50" height="15" uuid="e35e86e5-9752-4052-a9ba-a45d455f4ac6">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<box>
+						<leftPen lineWidth="0.25" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Segoe UI" size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[   ]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="80" y="-1" width="50" height="15" isPrintWhenDetailOverflows="true" uuid="edd9d189-b89b-43f8-82c2-db5dcc759c82">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box leftPadding="0">
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Dotted" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Segoe UI" size="6" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{invoiceId}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="210" y="-1" width="80" height="15" isPrintWhenDetailOverflows="true" uuid="3ef3ffc9-e88a-4382-8b69-2e9e9899b4a9">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Dotted" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Segoe UI" size="6" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{refDocName}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="ElementGroupHeight" x="130" y="-1" width="80" height="15" isPrintWhenDetailOverflows="true" uuid="fc0f1060-7aaa-418c-8420-29e378e1d48c">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Dotted" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Segoe UI" size="6" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{patName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="290" y="-1" width="80" height="15" isPrintWhenDetailOverflows="true" uuid="57cebaac-c0b2-4434-85bc-0ce14ada9826">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Dotted" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Segoe UI" size="6" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{salesByName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="ContainerHeight" x="50" y="-1" width="30" height="15" isPrintWhenDetailOverflows="true" uuid="420027e5-2113-498a-adbd-7a218f569fe9">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Dotted" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Dotted" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="6" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{InvoiceDate_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="ContainerHeight" x="370" y="-1" width="50" height="15" isPrintWhenDetailOverflows="true" uuid="b1d819c1-7851-4546-b696-5d97aaf7cda8">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25" lineStyle="Dotted"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Dotted" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="styled">
+					<font size="6"/>
+					<paragraph leftIndent="0" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sales}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="ContainerHeight" x="420" y="-1" width="50" height="15" isPrintWhenDetailOverflows="true" uuid="693a05dd-1abf-4a53-a3a6-139218397452">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25" lineStyle="Dotted"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Dotted" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="styled">
+					<font size="6"/>
+					<paragraph leftIndent="0" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="ContainerHeight" x="470" y="-1" width="50" height="15" isPrintWhenDetailOverflows="true" uuid="053dd7b8-e9a4-478a-b7fa-cdb71c5b3201">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25" lineStyle="Dotted"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Dotted" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="styled">
+					<font size="6"/>
+					<paragraph leftIndent="0" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{urgentFee}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="ContainerHeight" x="520" y="-1" width="50" height="15" isPrintWhenDetailOverflows="true" uuid="794f2822-54e9-4bc0-a07e-dd6f8d40c153">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25" lineStyle="Dotted"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Dotted" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="styled">
+					<font size="6"/>
+					<paragraph leftIndent="0" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{serviceCharge}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="ContainerHeight" x="570" y="-1" width="50" height="15" isPrintWhenDetailOverflows="true" uuid="a05add49-3af5-401b-8dab-c2a159be5a08">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25" lineStyle="Dotted"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Dotted" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="styled">
+					<font size="6"/>
+					<paragraph leftIndent="0" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalCancel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="ContainerHeight" x="620" y="-1" width="50" height="15" isPrintWhenDetailOverflows="true" uuid="3cc9c9ce-db48-4b51-b53e-d9e86a9d845e">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25" lineStyle="Dotted"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Dotted" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="styled">
+					<font size="6"/>
+					<paragraph leftIndent="0" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalSales}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="ContainerHeight" x="670" y="-1" width="50" height="15" isPrintWhenDetailOverflows="true" uuid="52337b43-7495-43be-af5f-9078c4ff72cd">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25" lineStyle="Dotted"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Dotted" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="styled">
+					<font size="6"/>
+					<paragraph leftIndent="0" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalDiscAmt}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="ContainerHeight" x="720" y="-1" width="60" height="15" isPrintWhenDetailOverflows="true" uuid="0f391bc0-9411-4876-8f4e-47e10326c0f3">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25" lineStyle="Dotted"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Dotted" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="styled">
+					<font size="6"/>
+					<paragraph leftIndent="0" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{netSale}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="MMM d, yyyy" isBlankWhenNull="true">
+				<reportElement stretchType="ContainerHeight" x="0" y="-1" width="50" height="15" isPrintWhenDetailOverflows="true" uuid="c0184eaf-6a7e-40e3-b205-61f40261018e">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{InvoiceDate_COUNT}==1? 	$F{invoiceDate} : ""]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

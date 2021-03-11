@@ -1,6 +1,7 @@
 package com.aktarulahsan.erp.tms.order;
 
 import com.aktarulahsan.erp.core.base.BaseRepository;
+import com.aktarulahsan.erp.tms.order.model.OrderDetailsModels;
 import com.aktarulahsan.erp.util.Response;
 import org.json.JSONArray;
 import org.springframework.stereotype.Repository;
@@ -39,15 +40,15 @@ public class OrdertailsRepository  extends BaseRepository {
     }
 
     public Response findDetailsById(String id) {
-        OrderDetailsModel entity = new OrderDetailsModel();
-        entity.setOrderMaserNo(Integer.parseInt(id));
+        OrderDetailsModels entity = new OrderDetailsModels();
+        entity.setOrderd_no(Integer.parseInt(id));
 //        roomEntity.setActiveStatus(1);
         return getListFindById(criteriaQuery(entity));
     }
 
 //    public Response findOrderByDeliveryStatus(HttpServletRequest request) {
 //        int cusId = Integer.parseInt(request.getParameter("customerCode"));
-//        OrderDetailsModel entity = new OrderDetailsModel();
+//        OrderDetailsModels entity = new OrderDetailsModels();
 //        entity.setStatus(1);
 ////        if(cusId !="ADMIN"){
 //        entity.setCustomerCode(cusId);
@@ -58,8 +59,8 @@ public class OrdertailsRepository  extends BaseRepository {
 //    }
 
     public Response findMesurementByOrderid(String id) {
-        OrderDetailsModel entity = new OrderDetailsModel();
-        entity.setOrderMaserNo(Integer.parseInt(id));
+        OrderDetailsModels entity = new OrderDetailsModels();
+        entity.setOrderd_no(Integer.parseInt(id));
         return getListFindById(criteriaQuery(entity));
     }
 
@@ -69,20 +70,36 @@ public class OrdertailsRepository  extends BaseRepository {
         String message = "";
 
         OrderAccountDetailsModel model = objectMapperReadValue(reqObj, OrderAccountDetailsModel.class);
-        OrderDetailsModel entity = new OrderDetailsModel();
-        entity.setOrderMaserNo(model.getOrderMaserNo());
-        entity.setItemId(model.getItemId());
-        return getListFindById(criteriaQuery(entity));
+        OrderDetailsModels entity = new OrderDetailsModels();
+        entity.setOrderd_no(model.getOrderMaserNo());
+        entity.setI_id(model.getItemId());
+
+
+        return baseFindById(criteriaQuery(entity));
+
+//        return getListFindById(criteriaQuery(entity));
     }
 
-    public OrderDetailsModel findById(int id) {
+//    public OrderDetailsModels findByorderId(int id) {
+//
+//        OrderDetailsModels model 	= new OrderDetailsModels();
+//        model.setOrderd_no(id);
+//        Response response = baseFindById(criteriaQuery(model));
+//        if (response.isSuccess()) {
+//
+//            return getValueFromObject(response.getObj(), OrderDetailsModels.class);
+//        }
+//        return null;
+//    }
 
-        OrderDetailsModel model 	= new OrderDetailsModel();
-        model.setOrderMaserNo(id);
+    public OrderDetailsModels findById(int id) {
+
+        OrderDetailsModels model 	= new OrderDetailsModels();
+        model.setOrderd_no(id);
         Response response = baseFindById(criteriaQuery(model));
         if (response.isSuccess()) {
 
-            return getValueFromObject(response.getObj(), OrderDetailsModel.class);
+            return getValueFromObject(response.getObj(), OrderDetailsModels.class);
         }
         return null;
     }
@@ -93,14 +110,14 @@ public class OrdertailsRepository  extends BaseRepository {
 
     public Response list(String reqObj) {
 
-        OrderDetailsModel branchModel = null;
+        OrderDetailsModels branchModel = null;
         if (null != reqObj) {
-            branchModel = objectMapperReadValue(reqObj, OrderDetailsModel.class);
+            branchModel = objectMapperReadValue(reqObj, OrderDetailsModels.class);
         }
         return baseList(criteriaQuery(branchModel));
     }
 
-    private CriteriaQuery criteriaQuery(OrderDetailsModel filter) {
+    private CriteriaQuery criteriaQuery(OrderDetailsModels filter) {
         init();
 
         List<Predicate> p 	= new ArrayList<Predicate>();
@@ -113,7 +130,7 @@ public class OrdertailsRepository  extends BaseRepository {
         }
         return criteria;
     }
-    private List<Predicate> criteriaCondition(OrderDetailsModel filter, CriteriaBuilder builder, Root<OrderDetailsModel> root) {
+    private List<Predicate> criteriaCondition(OrderDetailsModels filter, CriteriaBuilder builder, Root<OrderDetailsModels> root) {
 
         if (builder == null) {
             builder 		= super.builder;
@@ -125,12 +142,12 @@ public class OrdertailsRepository  extends BaseRepository {
         List<Predicate> p 	= new ArrayList<Predicate>();
 
         if (filter != null) {
-            if (filter.getOrderMaserNo() >0) {
-                Predicate condition 	= builder.equal(root.get("orderMaserNo"), filter.getOrderMaserNo());
+            if (filter.getOrderd_no() >0) {
+                Predicate condition 	= builder.equal(root.get("orderd_no"), filter.getOrderd_no());
                 p.add(condition);
             }
-            if (filter.getItemId() >0) {
-                Predicate condition 	= builder.equal(root.get("itemId"), filter.getItemId());
+            if (filter.getI_id() >0) {
+                Predicate condition 	= builder.equal(root.get("i_id"), filter.getI_id());
                 p.add(condition);
             }
 //            if (filter.ge() >0) {
@@ -150,7 +167,7 @@ public class OrdertailsRepository  extends BaseRepository {
     }
 
     private void init() {
-        initEntityManagerBuilderCriteriaQueryRoot(OrderDetailsModel.class);
+        initEntityManagerBuilderCriteriaQueryRoot(OrderDetailsModels.class);
         CriteriaBuilder builder 	= super.builder;
         CriteriaQuery criteria 		= super.criteria;
         Root root 					= super.root;

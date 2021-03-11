@@ -1,5 +1,6 @@
 package com.aktarulahsan.erp.tms.order;
 
+import com.aktarulahsan.erp.tms.order.model.OrderMasterModel;
 import com.aktarulahsan.erp.util.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,9 @@ public class OrderService {
     private  OrdertailsRepository orderDetailsService;
     @Autowired
     private OrderAccountDetailsRepository adService;
+
+    @Autowired
+    private  OrderDetailsViewRepository viewRepository;
 
 
     public Response list(String reqObj) {
@@ -53,12 +57,17 @@ public class OrderService {
         return adService.findAccountInfoByOrderid(id);
     }
 
+    public Response findViewByOrderid(String id) {
+
+        return viewRepository.findAccountInfoByOrderid(id);
+    }
+
 
     public Response findAccountInfoByOrderidandItemId(String reqObj) {
         return orderDetailsService.findAccountInfoByOrderidandItemId(reqObj);
     }
 
-    public OrderModel findById(String id) {
+    public OrderMasterModel findById(String id) {
 
         return repository.findById(id);
     }

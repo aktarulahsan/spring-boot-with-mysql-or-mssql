@@ -4,9 +4,10 @@ package com.aktarulahsan.erp.tms.order.report;
 import com.aktarulahsan.erp.core.base.BaseRepository;
 import com.aktarulahsan.erp.core.reportConfig.reportConfig.CoreJasperService;
 import com.aktarulahsan.erp.core.reportConfig.reportConfig.CusJasperReportDef;
-import com.aktarulahsan.erp.tms.order.OrderModel;
-import com.aktarulahsan.erp.tms.order.OrderRepository;
+import com.aktarulahsan.erp.tms.order.*;
+import com.aktarulahsan.erp.tms.order.model.OrderMasterModel;
 import com.aktarulahsan.erp.util.CommonFunction;
+import com.aktarulahsan.erp.util.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,13 +26,20 @@ public class OrderReportRepository extends BaseRepository {
     @Autowired
     OrderRepository repository;
 
+    @Autowired
+    OrdertailsRepository drepository;
+    @Autowired
+    OrderDetailsViewRepository viewRepository;
 
 
-
-    public CusJasperReportDef demoReport() {
+    public CusJasperReportDef demoReport(String reqObj) {
 
         OrderReportDato demoDto = new OrderReportDato();
         List<OrderReportDato> demoList = new ArrayList<>();
+
+
+        List<OrdertailsView> orderList = new ArrayList<>();
+        OrderMasterModel model = objectMapperReadValue(reqObj , OrderMasterModel.class);
 
 //        demoDto.setPatientname("Mohammad Galib");
 //        demoDto.setRank("Maj.");
@@ -40,22 +48,30 @@ public class OrderReportRepository extends BaseRepository {
 //        demoDto.setCompanyAddress("Mirpur 10, Dhaka");
 //        demoDto.setGShear("0");
 
-        OrderModel model = new OrderModel();
-        model =  repository.findById("992309731");
+//        OrderMasterModel model = new OrderMasterModel();
+        model =  repository.findById(String.valueOf(model.getOrderNo()));
+        OrderAccountDetailsModel orderAccountDetailsModel = new OrderAccountDetailsModel();
 
+        Response res= drepository.findMesurementByOrderid(String.valueOf(model.getOrderNo()));
 
-        demoDto.setOrderNo(454545);
-        demoDto.setCustomerCode(101);
-        demoDto.setTotalAmount(500.0);
+//        model.setOrderDetailsModelsList(res.getItems());
+        Response rs = viewRepository.findAccountInfoByOrderid(String.valueOf(model.getOrderNo()));
 
-        demoList.add(demoDto);
+//        demoDto.setOrderNo(model.getOrderNo());
+//        demoDto.setCustomerCode(model.getCustomerCode());
+//        demoDto.setTotalAmount(model.getTotalAmount());
+
+        orderList= rs.getItems();
 
         CusJasperReportDef report = new CusJasperReportDef();
         report.setOutputFilename("demo");
-        report.setReportName("ordersp");
+        report.setReportName("orderdetailsReport");
         report.setReportDir(CommonFunction.getResoucePath("/report/order") + "/");
         report.setReportFormat(CommonFunction.printFormat("PDF"));
-        report.setReportData(demoList);
+
+        report.setReportData(orderList);
+
+
 
         ByteArrayOutputStream baos = null;
 

@@ -1,6 +1,7 @@
 package com.aktarulahsan.erp.tms.order;
 
 import com.aktarulahsan.erp.core.base.BaseModel;
+import com.aktarulahsan.erp.tms.order.model.OrderDetailsModels;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -22,7 +23,7 @@ public class OrderAccountDetailsModel extends BaseModel {
     @Column(nullable = false, name = "ORDERAD_NO")
     int aid;
 
-    @Column(name = "ORDERM_NO")
+    @Column(name = "ORDERD_NO")
     int orderMaserNo;
 
     @Column(name = "I_ID")

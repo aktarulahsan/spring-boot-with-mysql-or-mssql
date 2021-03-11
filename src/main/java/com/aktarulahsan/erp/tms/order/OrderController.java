@@ -77,4 +77,12 @@ public Response findById(@RequestParam String id) {
     return service.findl3Id(id);
 }
 
+
+
+    @GetMapping("/findViewByOrderid")
+    public Response findViewByOrderid(@RequestParam("orderId") String id) {
+        return service.findViewByOrderid(id);
+    }
+
+
 }
