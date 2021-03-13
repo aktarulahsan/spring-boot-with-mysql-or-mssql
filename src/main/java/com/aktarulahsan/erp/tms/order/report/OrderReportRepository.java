@@ -8,6 +8,8 @@ import com.aktarulahsan.erp.tms.order.*;
 import com.aktarulahsan.erp.tms.order.model.OrderMasterModel;
 import com.aktarulahsan.erp.util.CommonFunction;
 import com.aktarulahsan.erp.util.Response;
+import com.lowagie.text.Font;
+import com.lowagie.text.pdf.BaseFont;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,11 +65,15 @@ public class OrderReportRepository extends BaseRepository {
 
         orderList= rs.getItems();
 
+//        BaseFont unicode = BaseFont.createFont("c:/windows/fonts/NikoshBan.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+//        Font font = new Font(unicode);
+
         CusJasperReportDef report = new CusJasperReportDef();
         report.setOutputFilename("demo");
         report.setReportName("orderdetailsReport");
         report.setReportDir(CommonFunction.getResoucePath("/report/order") + "/");
         report.setReportFormat(CommonFunction.printFormat("PDF"));
+
 
         report.setReportData(orderList);
 

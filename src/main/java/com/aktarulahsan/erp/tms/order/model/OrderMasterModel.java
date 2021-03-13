@@ -18,6 +18,9 @@ public class OrderMasterModel  extends BaseModel {
 //    ORDERD_NO, CUST_CODE, ORDER_DATE, D_DATE, TOTAL_AMOUNT, ADVANCE_AMOUNT, ORDER_STATUS, COMPANY_ID, BRANCH_ID, CREATED_BY, CREATE_DATE, UPDATED_BY, UPDATE_DATE
     //    ORDERM_NO, CUST_CODE, ORDER_DATE, D_DATE, TOTAL_AMOUNT, DM, ORDER_STATUS, CREATED_BY, CREATE_DATE, UPDATED_BY, UPDATE_DATE
 
+//    ORDERD_NO, CUST_CODE, ORDER_DATE, D_DATE, TOTAL_AMOUNT, ADVANCE_AMOUNT, ORDER_STATUS,
+//    WORKER, COMMENTS, COMPANY_ID, BRANCH_ID, CREATED_BY, CREATE_DATE, UPDATED_BY, UPDATE_DATE
+
     @Id
     @Column(nullable = false, name = "ORDERD_NO")
     int orderNo;
@@ -39,6 +42,12 @@ public class OrderMasterModel  extends BaseModel {
 
     @Column(name = "ORDER_STATUS")
     int status;
+
+    @Column(name = "WORKER")
+    String  worker;
+
+    @Column(name = "COMMENTS")
+    String comments;
 
     @Transient
     List<OrderAccountDetailsModel> orderAccountDetailsList;

@@ -73,6 +73,7 @@ public class OrderRepository extends BaseRepository {
             accountDetailsModel.setItemTotalAmount(accountDetailsModel.getQty()*accountDetailsModel.getItemRate());
             accountDetailsModel.detailsModel.setOrderd_no(oidi);
 
+//            detailsModel.setId(0);
             detailsModel = accountDetailsModel.detailsModel;
             detailsModel.setOrderd_no(oidi);
             detailsModel.setCust_code(model.getCustomerCode());
@@ -83,6 +84,7 @@ public class OrderRepository extends BaseRepository {
             resp = baseOnlySave(accountDetailsModel);
             Response rs;
             rs = baseOnlySave(detailsModel);
+            String p = rs.toString();
 
 //            for (int j = 0; j < model.getOrderAccountDetailsList().get(i).getOrdermeasurementList().size(); j++) {
 //

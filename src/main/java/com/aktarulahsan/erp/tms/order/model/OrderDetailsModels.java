@@ -3,11 +3,9 @@ package com.aktarulahsan.erp.tms.order.model;
 import com.aktarulahsan.erp.core.base.BaseModel;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 
@@ -18,6 +16,8 @@ import java.util.Date;
 public class OrderDetailsModels {
 //
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO,generator="native")
+    @GenericGenerator(name = "native",strategy = "native")
     @Column(name = "ID")
     int id;
 
@@ -102,6 +102,8 @@ public class OrderDetailsModels {
     @Column(name = "D_DATE")
     Date d_date;
 
+    @Column(name = "COMMENTS")
+    String  comments;
 
 
 
