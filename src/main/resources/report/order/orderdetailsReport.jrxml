@@ -76,74 +76,77 @@
 			<textField>
 				<reportElement x="0" y="52" width="60" height="18" uuid="f25e901e-f67e-4274-9adc-066b1c4ea999"/>
 				<textElement>
-					<font fontName="SutonnyMJ"/>
+					<font fontName="Tahoma"/>
 				</textElement>
 				<textFieldExpression><![CDATA["eyK"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="71" width="60" height="18" uuid="e7241142-eac1-421c-9edb-9043e1c25e4d"/>
 				<textElement>
-					<font fontName="SutonnyMJ"/>
+					<font fontName="Tahoma"/>
 				</textElement>
 				<textFieldExpression><![CDATA["‡cU"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="140" y="32" width="80" height="18" uuid="6d7e6eef-d5d8-4ec3-9acb-9d378bb818ab"/>
 				<textElement>
-					<font fontName="SonkhoMJ"/>
+					<font fontName="Tahoma"/>
 				</textElement>
 				<textFieldExpression><![CDATA["wnc"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="140" y="52" width="80" height="18" uuid="ecea590a-b8a8-4dac-9327-349e03f1cef4"/>
 				<textElement>
-					<font fontName="SonkhoMJ"/>
+					<font fontName="Tahoma"/>
 				</textElement>
 				<textFieldExpression><![CDATA["nvZ"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="140" y="71" width="80" height="18" uuid="957d2dca-3034-425b-9da1-0f0a7861c28f"/>
 				<textElement>
-					<font fontName="SonkhoMJ"/>
+					<font fontName="Tahoma"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Mjv"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="275" y="32" width="80" height="18" uuid="265855fc-554f-4d64-b140-48064a2faf05"/>
 				<textElement>
-					<font fontName="SonkhoMJ"/>
+					<font fontName="Tahoma"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Kvd"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="275" y="52" width="80" height="18" uuid="3653f0ba-1be7-4d21-9338-cc95bcd3003d"/>
 				<textElement>
-					<font fontName="SonkhoMJ"/>
+					<font fontName="Tahoma"/>
 				</textElement>
 				<textFieldExpression><![CDATA["gûix"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="275" y="71" width="80" height="18" uuid="d1ad4ac0-5ee3-49a2-9f30-497e2207b6dc"/>
 				<textElement>
-					<font fontName="SonkhoMJ"/>
+					<font fontName="Tahoma"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Kva"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="1" y="4" width="80" height="18" uuid="926a3a48-a73e-4403-878f-1f044118e530"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
 				<textFieldExpression><![CDATA["Item Name"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="420" y="32" width="60" height="18" uuid="e1cb08cf-d0ab-4238-b1ab-33812628b836"/>
 				<textElement>
-					<font fontName="SonkhoMJ"/>
+					<font fontName="Tahoma"/>
 				</textElement>
 				<textFieldExpression><![CDATA["‡Ni"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="36" width="60" height="14" uuid="a0f528b4-792e-4c07-93ac-b65f600c22a7"/>
 				<textElement>
-					<font fontName="IrabotiMJ"/>
+					<font fontName="Tahoma"/>
 				</textElement>
 				<textFieldExpression><![CDATA["লম্বা"]]></textFieldExpression>
 			</textField>
