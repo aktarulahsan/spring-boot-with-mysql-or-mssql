@@ -62,7 +62,7 @@ public class OrderRepository extends BaseRepository {
 
         model.setOrderNo(oidi);
 //        model.orderAccountDetails.setOrderMaserNo(oidi);
-        OrderDetailsModel orderDetailsModel =new OrderDetailsModel();
+
         res = baseOnlySave(model);
 
 

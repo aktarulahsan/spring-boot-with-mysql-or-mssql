@@ -20,7 +20,7 @@ import java.util.List;
 @Transactional
 public class OrdertailsRepository  extends BaseRepository {
 
-    ArrayList<OrderDetailsModel> list = new ArrayList<OrderDetailsModel>();
+    ArrayList<OrderDetailsModels> list = new ArrayList<OrderDetailsModels>();
     public Response delete(int id) {
         if (id ==0) {
             return getErrorResponse("Id is blank");
@@ -29,7 +29,7 @@ public class OrdertailsRepository  extends BaseRepository {
         Response  res = findDetailsById(String.valueOf(id));
 
         if(res.isSuccess()){
-            list = (ArrayList<OrderDetailsModel>) res.getItems();
+            list = (ArrayList<OrderDetailsModels>) res.getItems();
             for (int i = 0; i < list.size(); i++) {
                 baseDelete(list.get(i));
             }

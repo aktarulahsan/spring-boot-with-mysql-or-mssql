@@ -47,7 +47,7 @@ public class OrderAccountDetailsModel extends BaseModel {
     String designModel;
 
     @Transient
-    List<OrderDetailsModel> ordermeasurementList;
+    List<OrderDetailsModels> ordermeasurementList;
     @Transient
     OrderDetailsModels detailsModel;
 
