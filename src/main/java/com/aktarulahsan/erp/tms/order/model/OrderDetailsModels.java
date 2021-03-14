@@ -30,6 +30,9 @@ public class OrderDetailsModels {
     @Column(name = "I_ID")
     int i_id;
 
+    @Column(name = "PRODUCT_NAME")
+    String productName;
+
     @Column(name = "LOMBA")
     double lomba;
 

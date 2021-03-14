@@ -77,7 +77,7 @@ public class CustomerRepository extends BaseRepository {
     }
     public Response findDetailsById(String id) {
         CustomerModel entity = new CustomerModel();
-        entity.setCustomerCode(Integer.parseInt(id));
+        entity.setMobile(id);
         return baseFindById(criteriaQuery(entity));
     }
 
@@ -122,6 +122,11 @@ public class CustomerRepository extends BaseRepository {
 
             if (filter.getCustomerCode() >0) {
                 Predicate condition 	= builder.equal(root.get("customerCode"), filter.getCustomerCode());
+                p.add(condition);
+            }
+
+            if (filter.getMobile() !=null) {
+                Predicate condition 	= builder.equal(root.get("mobile"), filter.getMobile());
                 p.add(condition);
             }
 
