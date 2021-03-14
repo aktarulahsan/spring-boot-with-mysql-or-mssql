@@ -46,8 +46,8 @@ public class OrderRepository extends BaseRepository {
         Response res = new Response();
         JSONArray detailsList = new JSONArray();
         String message = "";
-        OrderDetailsModels detailsModel = new OrderDetailsModels();
-
+//        OrderDetailsModels detailsModel = new OrderDetailsModels();
+        List<OrderDetailsModels> orderDetailsModelsList = new ArrayList<>();
 //        OrderMasterModel model = objectMapperReadValue(reqObj, OrderMasterModel.class);
         OrderMasterModel model = objectMapperReadValue(reqObj , OrderMasterModel.class);
 
@@ -66,22 +66,22 @@ public class OrderRepository extends BaseRepository {
         res = baseOnlySave(model);
 
 
-        for (int i = 0; i < model.getOrderAccountDetailsList().size(); i++) {
-            OrderAccountDetailsModel accountDetailsModel= model.getOrderAccountDetailsList().get(i);
-            accountDetailsModel.setOrderMaserNo(oidi);
-            accountDetailsModel.setSsCreatedOn(new Date());
-            accountDetailsModel.setItemTotalAmount(accountDetailsModel.getQty()*accountDetailsModel.getItemRate());
-            accountDetailsModel.detailsModel.setOrderd_no(oidi);
+        for (int i = 0; i < model.getDetailsList().size(); i++) {
+            OrderDetailsModels detailsModel= model.getDetailsList().get(i);
+//            accountDetailsModel.setOrderMaserNo(oidi);
+//            accountDetailsModel.setSsCreatedOn(new Date());
+//            accountDetailsModel.setItemTotalAmount(accountDetailsModel.getQty()*accountDetailsModel.getItemRate());
+//            accountDetailsModel.detailsModel.setOrderd_no(oidi);
 
-//            detailsModel.setId(0);
-            detailsModel = accountDetailsModel.detailsModel;
+            detailsModel.setId(0);
+//            detailsModel = model.getDetailsList().get(i);
             detailsModel.setOrderd_no(oidi);
             detailsModel.setCust_code(model.getCustomerCode());
-            detailsModel.setQty(accountDetailsModel.getQty());
-            detailsModel.setItem_total_val(accountDetailsModel.getQty()*accountDetailsModel.getItemRate());
-            detailsModel.setItem_price(accountDetailsModel.getItemRate());
-            Response resp;
-            resp = baseOnlySave(accountDetailsModel);
+//            detailsModel.setQty(accountDetailsModel.getQty());
+//            detailsModel.setItem_total_val(accountDetailsModel.getQty()*accountDetailsModel.getItemRate());
+//            detailsModel.setItem_price(accountDetailsModel.getItemRate());
+//            Response resp;
+//            resp = baseOnlySave(accountDetailsModel);
             Response rs;
             rs = baseOnlySave(detailsModel);
             String p = rs.toString();

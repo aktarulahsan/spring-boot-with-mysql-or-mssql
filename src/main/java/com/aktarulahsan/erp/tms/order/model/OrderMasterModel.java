@@ -54,6 +54,6 @@ public class OrderMasterModel  extends BaseModel {
 
 
     @Transient
-    List<OrderDetailsModels> orderDetailsModelsList;
+    List<OrderDetailsModels> detailsList;
 
 }

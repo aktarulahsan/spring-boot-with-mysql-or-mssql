@@ -65,6 +65,10 @@ public class OrderController {
 
         return service.findAccountInfoByOrderidandItemId(reqObj);
     }
+    @GetMapping("/findOrderDetailsByOrderid")
+    public Response findOrderDetailsByOrderid(@RequestParam("orderId") String id) {
+        return service.findOrderDetailsByOrderid(id);
+    }
 
 
 

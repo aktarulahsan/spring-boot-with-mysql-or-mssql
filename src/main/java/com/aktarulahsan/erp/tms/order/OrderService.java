@@ -56,6 +56,10 @@ public class OrderService {
 
         return adService.findAccountInfoByOrderid(id);
     }
+    public Response  findOrderDetailsByOrderid(String id) {
+
+        return orderDetailsService.findDetailsById(id);
+    }
 
     public Response findViewByOrderid(String id) {
 
