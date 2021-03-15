@@ -42,4 +42,9 @@ public class CustomerController {
     public Response findDetailsById(@RequestParam("mobile") String id) {
         return service.findDetailsById(id);
     }
+    @GetMapping("/findByMobile")
+    public Response findDetailsByMobile(@RequestParam("mobile") String id) {
+        return service.findDetailsById(id);
+    }
+
 }
